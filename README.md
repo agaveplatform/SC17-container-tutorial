@@ -7,30 +7,24 @@ In this tutorial, we combine best practices and lessons learned while on-boardin
 
 ## Schedule
 
-A. Session I  
+
 
 |Time           | Topic                                                       |
 |---------------|-------------------------------------------------------------|
-|  9:30 - 10:00 | [Overview and introductions](overview/readme.md): Introduce instructors and learners. Lay out learning objectives for the morning session. Present an overview of containers and Science-as-a-Service APIs (Presentation and Discussion; 30 minutes)|
-|  10:00 - 10:20 | [Connect laptops to on-line resources](setup/readme.md) (hands-on)|
-|  10:20 - 12:00 | [Software Portability, Performance, and Persistence](portability_performance_and_persistence/readme.md) |
-|  10:20 - 11:50 | Develop locally: Participants will learn to build and test containers on their local computer. (Hands-on 40 minutes) |
-|  11:00 -  11:30 | Break   | 
-|  11:30 - 11:45 | Deploy to the cloud: Using the XSEDE Jetstream resource, participants will create a virtual machine and deploy their containers to it. (30 minutes) |
-|  11:45 - 12:00 | Scale to HPC: Participants will convert their Docker containers to Singularity and run them on an HPC resource at TACC. They will look at code performance between their local machine, the cloud, running in a container on HPC hardware, and running without a container on HPC hardware. We will discuss the pros and cons of containers and different container technologies. (40 minutes) |
-|  12:00 - 12:30 | Implications and Resources: Summarize results. Look at container repositories for scientific codes. Discuss applications of the technology(20 minutes) |
+|  8:30 - 9:00 | [Overview and introductions](overview/readme.md): Introduce instructors and learners. Lay out learning objectives for the morning session. Present an overview of containers and Science-as-a-Service APIs (Presentation and Discussion; 30 minutes)|
+|  9:00 - 9:20 | [Resources, Jupyter, Login](setup/readme.md) (hands-on)|
+|  9:20 - 10:00 | [Code, Build, and Test](portability_performance_and_persistence/readme.md) |
+|  9:20 - 9:40 | Checkout, build, run locally: Participants will learn to build and test containers on their local computer. (Hands-on 40 minutes) |
+|  9:40 - 10:00 | Set up auto-build, commit/save code change, run local and remote via agave cli/skd |
+|  10:00 - 10:30 | Break  | 
+|  10:30 - 10:45 | Viewing simulation results, sharing, provenance  |
+|  10:45 - 11:30 | Packaging and publishing experimental runs, results and codes |
+|  11:30 - 12:00 | Scaling, benchmarking, future directions, homework |
 
-B. Session II  
 
-|Time           | Topic                                                       |
-|---------------|-------------------------------------------------------------|
-|  13:30 - 14:00 | [Discuss the app lifecycle and challenges with distribution, provenance, and reproducibility](portability_performance_and_persistence/portability.md) (20 minutes) |
-|  14:00 - 14:30 | Agave as a Gateway Drug: A survey of alternative frameworks available in the Science-as-a-Service world and the trade offs associated with each one. (30 min) |
-|  14:30 - 15:00 | HPC from the Web using Agave: Register HPC Systems as Agave systems and explore the data management and collaboration capabilities it provides. (40 minutes) |
-|  15:00 -  15:30 | Break   | 
-|  10:20 - 10:50 | Science Apps: Turn the container from the morning session into a shareable, web accessible app. Run the app through the API and observe execution on the host machine. Look at the metadata and version information captured by the platform. (30 minutes) |
-|  10:20 - 10:50 | Collaborate Anywhere: Turn the container from the morning session into a shareable, web accessible app. Run the app through the API and observe execution on the host machine. Look at the metadata and version information captured by the platform. (30 minutes) |
-|  10:20 - 10:50 | Future Possibilities: Some remarks on where containerization and Science-as-a-Service are going. This will include future plans for the Agave Platform. (30 min) |
+
+
+
 
 
 ## Prequisites
@@ -45,3 +39,19 @@ B. Session II
 * [Agave Jupyter Hub](https://jupyter.agaveapi.co)
 * [Agave ToGo](https://deardooley.github.io/agave-togo/auth)
 * [Slack Channel](https://slackin.agaveapi.co/)
+
+
+
+
+
+
+
+|Time           | Topic                                                       |
+|---------------|-------------------------------------------------------------|
+|  13:30 - 14:00 | [Discuss the app lifecycle and challenges with distribution, provenance, and reproducibility](portability_performance_and_persistence/portability.md) (20 minutes) |
+|  14:00 - 14:30 | Agave as a Gateway Drug: A survey of alternative frameworks available in the Science-as-a-Service world and the trade offs associated with each one. (30 min) |
+|  14:30 - 15:00 | HPC from the Web using Agave: Register HPC Systems as Agave systems and explore the data management and collaboration capabilities it provides. (40 minutes) |
+|  15:00 -  15:30 | Break   | 
+|  10:20 - 10:50 | Science Apps: Turn the container from the morning session into a shareable, web accessible app. Run the app through the API and observe execution on the host machine. Look at the metadata and version information captured by the platform. (30 minutes) |
+|  10:20 - 10:50 | Collaborate Anywhere: Turn the container from the morning session into a shareable, web accessible app. Run the app through the API and observe execution on the host machine. Look at the metadata and version information captured by the platform. (30 minutes) |
+|  10:20 - 10:50 | Future Possibilities: Some remarks on where containerization and Science-as-a-Service are going. This will include future plans for the Agave Platform. (30 min) |

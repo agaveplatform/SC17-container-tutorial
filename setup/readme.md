@@ -1,6 +1,5 @@
 # Tutorial Setup
 
-
 ## Overview
 
 This is Jupyter

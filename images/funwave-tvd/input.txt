@@ -1,0 +1,32 @@
+!INPUT FILE FOR FUNWAVE_TVD
+  ! NOTE: all input parameter are capital sensitive
+  ! --------------------TITLE-------------------------------------
+  ! title only for log file
+TITLE = VESSEL
+  ! -------------------HOT START---------------------------------
+HOT_START = F
+FileNumber_HOTSTART = 1
+  ! -------------------PARALLEL INFO-----------------------------
+  !
+  !    PX,PY - processor numbers in X and Y
+  !    NOTE: make sure consistency with mpirun -np n (px*py)
+  !
+PX = 4
+PY = 1
+  ! --------------------DEPTH-------------------------------------
+  ! Depth types, DEPTH_TYPE=DATA: from depth file
+  !              DEPTH_TYPE=FLAT: idealized flat, need depth_flat
+  !              DEPTH_TYPE=SLOPE: idealized slope,
+  !                                 need slope,SLP starting point, Xslp
+  !                                 and depth_flat
+DEPTH_TYPE = FLAT
+DEPTH_FLAT = 10.0
+  ! -------------------PRINT---------------------------------
+  ! PRINT*,
+  ! result folder
+RESULT_FOLDER = output/
+
+  ! ------------------DIMENSION-----------------------------
+  ! global grid dimension
+Mglob = 500
+Nglob = 100

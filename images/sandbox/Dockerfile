@@ -28,6 +28,8 @@ RUN mkdir -p /var/run/sshd && \
     /usr/bin/ssh-keygen -A
 
 ADD ssh/id_rsa.pub /home/$TEST_USERNAME/.ssh/authorized_keys
+ADD ssh/id_rsa.pub /home/$TEST_USERNAME/.ssh/id_rsa.pub
+ADD ssh/id_rsa /home/$TEST_USERNAME/.ssh/id_rsa
 
 RUN chmod 700 /home/$TEST_USERNAME/.ssh && \
     chmod 600 /home/$TEST_USERNAME/.ssh/authorized_keys && \

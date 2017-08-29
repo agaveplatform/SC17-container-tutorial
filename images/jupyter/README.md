@@ -31,17 +31,17 @@ docker build -t agaveplatform/jupyter-datascience-notebook .
 
 ## Basic Use
 
-The following command starts a container with the Notebook server listening for HTTP connections on port 8888 with a randomly generated authentication token configured.
+The following command starts a container with the Notebook server listening for HTTP connections on port 8005 with a randomly generated authentication token configured.
 
 ```
-docker run -it --rm -p 8888:8888 --name jupyter-notebook agaveplatform/jupyter-datascience-notebook
+docker run -it --rm -p 8005:8005 --name jupyter-notebook agaveplatform/jupyter-datascience-notebook
 ```
 
 Take note of the authentication token included in the notebook startup log messages. Include it in the URL you visit to access the Notebook server or enter it in the Notebook login form.
 
 ## Orchestrated Use
 
-The following command starts a container with the Notebook server listening for HTTP connections on port 8888 with no auth token configured and your local Agave CLI credential cache mounted into the container.
+The following command starts a container with the Notebook server listening for HTTP connections on port 8005 with no auth token configured and your local Agave CLI credential cache mounted into the container.
 
 ```
 docker-compose up  
@@ -54,19 +54,19 @@ The Docker container executes a [`start-notebook.sh` script](../base-notebook/st
 You can pass [Jupyter command line options](https://jupyter.readthedocs.io/en/latest/projects/jupyter-command.html) through the `start-notebook.sh` script when launching the container. For example, to secure the Notebook server with a custom password hashed using `IPython.lib.passwd()` instead of the default token, run the following:
 
 ```
-docker run -d -p 8888:8888 agaveplatform/jupyter-datascience-notebook start-notebook.sh --NotebookApp.password='sha1:74ba40f8a388:c913541b7ee99d15d5ed31d4226bf7838f83a50e'
+docker run -d -p 8005:8005 agaveplatform/jupyter-datascience-notebook start-notebook.sh --NotebookApp.password='sha1:74ba40f8a388:c913541b7ee99d15d5ed31d4226bf7838f83a50e'
 ```
 
 For example, to set the base URL of the notebook server, run the following:
 
 ```
-docker run -d -p 8888:8888 agaveplatform/jupyter-datascience-notebook start-notebook.sh --NotebookApp.base_url=/some/path
+docker run -d -p 8005:8005 agaveplatform/jupyter-datascience-notebook start-notebook.sh --NotebookApp.base_url=/some/path
 ```
 
 For example, to disable all authentication mechanisms (not a recommended practice):
 
 ```
-docker run -d -p 8888:8888 agaveplatform/jupyter-datascience-notebook start-notebook.sh --NotebookApp.token=''
+docker run -d -p 8005:8005 agaveplatform/jupyter-datascience-notebook start-notebook.sh --NotebookApp.token=''
 ```
 
 You can sidestep the `start-notebook.sh` script and run your own commands in the container. See the *Alternative Commands* section later in this document for more information.
@@ -87,7 +87,7 @@ You may customize the execution of the Docker container and the Notebook server 
 You may mount SSL key and certificate files into a container and configure Jupyter Notebook to use them to accept HTTPS connections. For example, to mount a host folder containing a `notebook.key` and `notebook.crt`:
 
 ```
-docker run -d -p 8888:8888 \
+docker run -d -p 8005:8005 \
     -v /some/host/folder:/etc/ssl/notebook \
     agaveplatform/jupyter-datascience-notebook start-notebook.sh \
     --NotebookApp.keyfile=/etc/ssl/notebook/notebook.key
@@ -97,7 +97,7 @@ docker run -d -p 8888:8888 \
 Alternatively, you may mount a single PEM file containing both the key and certificate. For example:
 
 ```
-docker run -d -p 8888:8888 \
+docker run -d -p 8005:8005 \
     -v /some/host/folder/notebook.pem:/etc/ssl/notebook.pem \
     agaveplatform/jupyter-datascience-notebook start-notebook.sh \
     --NotebookApp.certfile=/etc/ssl/notebook.pem

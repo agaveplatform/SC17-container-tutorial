@@ -11828,7 +11828,6 @@ you can get one here: <a href="https://public.agaveapi.co/create_account">https:
 <span class="c1"># and prints out the assignment so you can see the</span>
 <span class="c1"># value that was assigned.</span>
 <span class="n">setvar</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">MACHINE=shelob.hpc.lsu.edu</span>
 <span class="s2">AGAVE_USERNAME=stevenrbrandt</span>
 <span class="s2">MACHINE_USERNAME=sbrandt</span>
 <span class="s2">BASE_APP_NAME=drawgau</span>
@@ -11856,8 +11855,7 @@ you can get one here: <a href="https://public.agaveapi.co/create_account">https:
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>MACHINE=shelob.hpc.lsu.edu
-AGAVE_USERNAME=stevenrbrandt
+<pre>AGAVE_USERNAME=stevenrbrandt
 MACHINE_USERNAME=sbrandt
 BASE_APP_NAME=drawgau
 PORT=22
@@ -11922,11 +11920,10 @@ We use python3's getpass() facility to avoid displaying said passwords on the sc
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">repvar</span><span class="p">(</span><span class="s2">&quot;Password for $MACHINE_USERNAME&quot;</span><span class="p">))</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;MACHINE_PWD&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">getpass</span><span class="p">()</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">setvar</span><span class="p">(</span><span class="s2">&quot;APP_NAME=${BASE_APP_NAME}-${VM_MACHINE}-${AGAVE_USERNAME}&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11943,8 +11940,7 @@ We use python3's getpass() facility to avoid displaying said passwords on the sc
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Password for sbrandt
-········
+<pre>APP_NAME=drawgau-sandbox-stevenrbrandt
 </pre>
 </div>
 </div>
@@ -11958,15 +11954,7 @@ We use python3's getpass() facility to avoid displaying said passwords on the sc
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
-<span class="n">g</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([^\.]*)\.(.*)&#39;</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MACHINE&quot;</span><span class="p">])</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;MACH&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;NETWORK&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">repvar</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">Configuring for Machine: $MACH</span>
-<span class="s2">Full Name: `$MACHINE&#39;</span>
-<span class="s2">Network: `$NETWORK&#39;</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="p">))</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">setvar</span><span class="p">(</span><span class="s2">&quot;PATH=$HOME/src/cli/bin:$PATH&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11983,9 +11971,7 @@ We use python3's getpass() facility to avoid displaying said passwords on the sc
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Configuring for Machine: shelob
-Full Name: `shelob.hpc.lsu.edu&#39;
-Network: `hpc.lsu.edu&#39;
+<pre>PATH=/home/jovyan/src/cli/bin:/opt/conda/envs/python2/bin:/opt/conda/bin:/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/jq/bin:/home/jovyan/src/cli/bin
 </pre>
 </div>
 </div>
@@ -11997,112 +11983,6 @@ Network: `hpc.lsu.edu&#39;
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">setvar</span><span class="p">(</span><span class="s2">&quot;APP_NAME=${BASE_APP_NAME}-${MACH}-${AGAVE_USERNAME}&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>APP_NAME=drawgau-shelob-stevenrbrandt
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">setvar</span><span class="p">(</span><span class="s2">&quot;PATH=$HOME/agave/cli/bin:$PATH&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>PATH=/home/jovyan/agave/cli/bin:/opt/conda/envs/python2/bin:/opt/conda/bin:/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">mkdir</span> -p ~/agave
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">cd</span> ~/agave
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>/home/jovyan/agave
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">setvar</span><span class="p">(</span><span class="s2">&quot;AGAVE_JSON_PARSER=jq&quot;</span><span class="p">)</span>
@@ -12143,38 +12023,7 @@ Network: `hpc.lsu.edu&#39;
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>git clone https://bitbucket.org/agaveapi/cli.git
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>fatal: destination path &#39;cli&#39; already exists and is not an empty directory.
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># This prepares your linux account for use with Agave.</span>
@@ -12218,7 +12067,7 @@ to renew your Agave credentials.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>clients-delete -u <span class="nv">$AGAVE_USERNAME</span> -p <span class="s2">&quot;</span><span class="nv">$AGAVE_PWD</span><span class="s2">&quot;</span> <span class="nv">$APP_NAME</span> 
@@ -12238,7 +12087,7 @@ to renew your Agave credentials.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Successfully deleted client drawgau-shelob-stevenrbrandt
+<pre>Successfully deleted client drawgau-sandbox-stevenrbrandt
 </pre>
 </div>
 </div>
@@ -12249,7 +12098,7 @@ to renew your Agave credentials.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>clients-create -p <span class="s2">&quot;</span><span class="nv">$AGAVE_PWD</span><span class="s2">&quot;</span> -S -N <span class="nv">$APP_NAME</span> -u <span class="nv">$AGAVE_USERNAME</span>
@@ -12269,9 +12118,9 @@ to renew your Agave credentials.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Successfully created client drawgau-shelob-stevenrbrandt
-key: VvtWd2rzsp1o2e6cvsAht_qiOH0a 
-secret: xZfZbq1VDd3BW0eVPvrBD26vVY4a
+<pre>Successfully created client drawgau-sandbox-stevenrbrandt
+key: _8kSs2vKN2TfppkwpqiyYJN5YgQa 
+secret: jXlnJHmVFoIuOWQNcs3BCDDeRBQa
 </pre>
 </div>
 </div>
@@ -12282,7 +12131,7 @@ secret: xZfZbq1VDd3BW0eVPvrBD26vVY4a
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>auth-tokens-create -u <span class="nv">$AGAVE_USERNAME</span> -p <span class="s2">&quot;</span><span class="nv">$AGAVE_PWD</span><span class="s2">&quot;</span>
@@ -12303,7 +12152,7 @@ secret: xZfZbq1VDd3BW0eVPvrBD26vVY4a
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Token for agave.prod:stevenrbrandt successfully refreshed and cached for 14400 seconds
-9c9dc088a169586b5b0c91cbbf85e0
+97401142a1e9a0dc4040bc7b67439862
 </pre>
 </div>
 </div>
@@ -12325,12 +12174,13 @@ The public key appears below.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Store your password in ~/pw.txt. Ensure that this file is</span>
-<span class="c1"># not readable by others.</span>
-<span class="o">!</span><span class="nb">umask</span> <span class="m">077</span><span class="p">;</span> rm ~/pw.txt<span class="p">;</span> <span class="nb">echo</span> <span class="si">${</span><span class="nv">MACHINE_PWD</span><span class="si">}</span> &gt; ~/pw.txt<span class="p">;</span> ls -ls ~/pw.txt
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># The following command checks that your ssh key works and adds the</span>
+<span class="c1"># virtual machine&#39;s host key to your known hosts file</span>
+<span class="o">!</span>ssh -oStrictHostKeyChecking<span class="o">=</span>no <span class="err">\</span>
+  <span class="o">-</span><span class="n">p</span> <span class="err">$</span><span class="p">{</span><span class="n">PORT</span><span class="p">}</span> <span class="err">$</span><span class="p">{</span><span class="n">MACHINE_USERNAME</span><span class="p">}</span><span class="err">@$</span><span class="p">{</span><span class="n">VM_IPADDRESS</span><span class="p">}</span> <span class="n">echo</span> <span class="s2">&quot;PASSWORD WORKS FOR $VM_MACHINE&quot;</span>
 </pre></div>
 
 </div>
@@ -12347,46 +12197,8 @@ The public key appears below.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>4 -rw------- 1 jovyan users 23 Aug 28 22:33 /home/jovyan/pw.txt
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># The command below will install your public key on the target machine. Once</span>
-<span class="c1"># this is in place, you won&#39;t need to use a password to login to that machine again.</span>
-<span class="c1"># Note: The command below assumes you have .ssh directory on the remote machine with</span>
-<span class="c1"># the correct permission settings.</span>
-<span class="c1">#</span>
-<span class="c1"># The bash kernel for jupyter notebooks does not allow prompting for passwords.</span>
-<span class="c1"># Copy the output of the echo command into a terminal and execute it</span>
-<span class="o">!</span>sshpass -f ~/pw.txt ssh -oStrictHostKeyChecking<span class="o">=</span>no <span class="err">\</span>
-  <span class="o">-</span><span class="n">p</span> <span class="err">$</span><span class="p">{</span><span class="n">PORT</span><span class="p">}</span> <span class="err">$</span><span class="p">{</span><span class="n">MACHINE_USERNAME</span><span class="p">}</span><span class="err">@$</span><span class="p">{</span><span class="n">MACHINE</span><span class="p">}</span> <span class="n">echo</span> <span class="s2">&quot;PASSWORD WORKS FOR $MACHINE&quot;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>PASSWORD WORKS FOR shelob.hpc.lsu.edu
+<pre>Warning: Permanently added &#39;204.90.47.30&#39; (RSA) to the list of known hosts.
+PASSWORD WORKS FOR sandbox
 </pre>
 </div>
 </div>
@@ -12407,10 +12219,10 @@ with a special json file.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">setvar</span><span class="p">(</span><span class="s2">&quot;STORAGE_MACHINE=${MACH}-storage-${AGAVE_USERNAME}&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">cd</span>
 </pre></div>
 
 </div>
@@ -12427,7 +12239,7 @@ with a special json file.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>STORAGE_MACHINE=shelob-storage-stevenrbrandt
+<pre>/home/jovyan
 </pre>
 </div>
 </div>
@@ -12438,25 +12250,107 @@ with a special json file.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">setvar</span><span class="p">(</span><span class="s2">&quot;STORAGE_MACHINE=${VM_MACHINE}-storage-${AGAVE_USERNAME}&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>STORAGE_MACHINE=sandbox-storage-stevenrbrandt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># The public and private keys will need to be inserted into</span>
+<span class="c1"># json data structures. By default, they are not properly formatted</span>
+<span class="c1"># for this purpose. The jsonpki command &quot;fixes&quot; them.</span>
+<span class="o">!</span>jsonpki --public ~/.ssh/id_rsa.pub &gt; ~/.ssh/id_rsa.pub.txt
+<span class="o">!</span>jsonpki --private ~/.ssh/id_rsa &gt; ~/.ssh/id_rsa.txt
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PUB_KEY&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">readfile</span><span class="p">(</span><span class="s2">&quot;.ssh/id_rsa.pub.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;PRIV_KEY&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">readfile</span><span class="p">(</span><span class="s2">&quot;.ssh/id_rsa.txt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Reading file `.ssh/id_rsa.pub.txt&#39;
+Reading file `.ssh/id_rsa.txt&#39;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">writefile</span><span class="p">(</span><span class="s2">&quot;${STORAGE_MACHINE}.txt&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;&quot;{</span>
 <span class="s2">    &quot;id&quot;: &quot;${STORAGE_MACHINE}&quot;,</span>
-<span class="s2">    &quot;name&quot;: &quot;${MACH} storage (${MACHINE_USERNAME})&quot;,</span>
-<span class="s2">    &quot;description&quot;: &quot;The ${MACH} computer&quot;,</span>
-<span class="s2">    &quot;site&quot;: &quot;${NETWORK}&quot;,</span>
+<span class="s2">    &quot;name&quot;: &quot;${VM_MACHINE} storage (${MACHINE_USERNAME})&quot;,</span>
+<span class="s2">    &quot;description&quot;: &quot;The ${VM_MACHINE} computer&quot;,</span>
+<span class="s2">    &quot;site&quot;: &quot;jetstream-ci.org&quot;,</span>
 <span class="s2">    &quot;type&quot;: &quot;STORAGE&quot;,</span>
 <span class="s2">    &quot;storage&quot;: {</span>
-<span class="s2">        &quot;host&quot;: &quot;${MACHINE}&quot;,</span>
+<span class="s2">        &quot;host&quot;: &quot;${VM_IPADDRESS}&quot;,</span>
 <span class="s2">        &quot;port&quot;: ${PORT},</span>
 <span class="s2">        &quot;protocol&quot;: &quot;SFTP&quot;,</span>
 <span class="s2">        &quot;rootDir&quot;: &quot;/&quot;,</span>
 <span class="s2">        &quot;homeDir&quot;: &quot;${HOME_DIR}&quot;,</span>
 <span class="s2">        &quot;auth&quot;: {</span>
 <span class="s2">          &quot;username&quot; : &quot;${MACHINE_USERNAME}&quot;,</span>
-<span class="s2">          &quot;password&quot; : &quot;${MACHINE_PWD}&quot;,</span>
-<span class="s2">          &quot;type&quot; : &quot;PASSWORD&quot;</span>
+<span class="s2">          &quot;publicKey&quot; : &quot;${PUB_KEY}&quot;,</span>
+<span class="s2">          &quot;privateKey&quot; : &quot;${PRIV_KEY}&quot;,</span>
+<span class="s2">          &quot;type&quot; : &quot;SSHKEYS&quot;</span>
 <span class="s2">        }</span>
 <span class="s2">    }</span>
 <span class="s2">}</span>
@@ -12477,7 +12371,7 @@ with a special json file.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Writing file `shelob-storage-stevenrbrandt.txt&#39;
+<pre>Writing file `sandbox-storage-stevenrbrandt.txt&#39;
 </pre>
 </div>
 </div>
@@ -12488,7 +12382,7 @@ with a special json file.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>systems-addupdate -F <span class="si">${</span><span class="nv">STORAGE_MACHINE</span><span class="si">}</span>.txt
@@ -12508,7 +12402,7 @@ with a special json file.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Successfully added system shelob-storage-stevenrbrandt
+<pre>Successfully added system sandbox-storage-stevenrbrandt
 </pre>
 </div>
 </div>
@@ -12519,7 +12413,7 @@ with a special json file.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>files-list -S <span class="si">${</span><span class="nv">STORAGE_MACHINE</span><span class="si">}</span> ./ <span class="p">|</span> head -5
@@ -12564,61 +12458,7 @@ the execution machine, it's queues, processors, etc.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Assuming ${MACHINE} uses torque as a queuing system, this will get info about the queues</span>
-<span class="c1"># The command you need to use to list the queue information varies from system to system.</span>
-<span class="c1"># For Torque, the command is &quot;qstat -q.&quot;</span>
-<span class="o">!</span>sshpass -f ~/pw.txt ssh <span class="si">${</span><span class="nv">MACHINE_USERNAME</span><span class="si">}</span>@<span class="si">${</span><span class="nv">MACHINE</span><span class="si">}</span> -p <span class="si">${</span><span class="nv">PORT</span><span class="si">}</span> qstat -q 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
-server: mike3
-
-Queue            Memory CPU Time Walltime Node  Run Que Lm  State
----------------- ------ -------- -------- ----  --- --- --  -----
-workq              --      --    72:00:00   128  12   0 --   E R
-mwfa               --      --    72:00:00     8   0   0 --   E R
-bigmem             --      --    168:00:0     1   1   0 --   E R
-westmere           --      --    168:00:0     1   0   0 --   E R
-lasigma            --      --    72:00:00    28   5   1 --   E R
-bigmemtb           --      --    48:00:00     1   0   0 --   E R
-priority           --      --    168:00:0   128   0   0 --   E R
-single             --      --    72:00:00     1  18   0 --   E R
-gpu                --      --    72:00:00    16   0   0 --   E R
-preempt            --      --    72:00:00   --    0   0 --   E R
-checkpt            --      --    72:00:00   128  13   0 --   E R
-admin              --      --    24:00:00   --    0   0 --   E R
-scalemp            --      --    24:00:00     1   0   0 --   E R
-shelob             --      --    72:00:00    42   0   0 --   E R
-                                               ----- -----
-                                                  49     1
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">setvar</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
@@ -12628,7 +12468,7 @@ shelob             --      --    72:00:00    42   0   0 --   E R
 <span class="s2"># We figure out the number of processes automatically.</span>
 <span class="s2"># This assumes the head node and compute nodes have</span>
 <span class="s2"># the same number of procs.</span>
-<span class="s2">CPUINFO=$(sshpass -f ~/pw.txt ssh ${MACHINE_USERNAME}@${MACHINE} -p ${PORT} lscpu)</span>
+<span class="s2">CPUINFO=$(ssh ${MACHINE_USERNAME}@${VM_IPADDRESS} -p ${PORT} lscpu)</span>
 <span class="s2">QUEUE=shelob # Name of default queue</span>
 <span class="s2">NODES=42 # Number of nodes in queue</span>
 <span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
@@ -12688,10 +12528,10 @@ PROCS=16
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">setvar</span><span class="p">(</span><span class="s2">&quot;EXEC_MACHINE=${MACH}-exec-${AGAVE_USERNAME}&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">setvar</span><span class="p">(</span><span class="s2">&quot;EXEC_MACHINE=${VM_MACHINE}-exec-${AGAVE_USERNAME}&quot;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -12708,7 +12548,7 @@ PROCS=16
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>EXEC_MACHINE=shelob-exec-stevenrbrandt
+<pre>EXEC_MACHINE=sandbox-exec-stevenrbrandt
 </pre>
 </div>
 </div>
@@ -12719,86 +12559,26 @@ PROCS=16
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># You will probably need to provide a custom header</span>
-<span class="c1"># for your batch queue scripts to identify the allocation</span>
-<span class="c1"># that your job will use. Some machines may require other</span>
-<span class="c1"># special information. The shelob machine upon which this</span>
-<span class="c1"># tutorial is based requires ppn=16 to be set. You may</span>
-<span class="c1"># want to edit that parameter if you are using this notebook</span>
-<span class="c1"># for a different machine.</span>
-<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DIRECTIVES&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\\</span><span class="s2">s*&quot;</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="p">,</span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">#PBS -A ${ALLOCATION}</span>
-<span class="s2">#PBS -l cput=\${AGAVE_JOB_MAX_RUNTIME}</span>
-<span class="s2">#PBS -l walltime=\${AGAVE_JOB_MAX_RUNTIME}</span>
-<span class="s2">#PBS -q \${AGAVE_JOB_BATCH_QUEUE}</span>
-<span class="s2">#PBS -l nodes=\${AGAVE_JOB_NODE_COUNT}:ppn=16</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;DIRECTIVES&quot;</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[38]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>&#39;#PBS -A ${ALLOCATION}\\n#PBS -l cput=\\${AGAVE_JOB_MAX_RUNTIME}\\n#PBS -l walltime=\\${AGAVE_JOB_MAX_RUNTIME}\\n#PBS -q \\${AGAVE_JOB_BATCH_QUEUE}\\n#PBS -l nodes=\\${AGAVE_JOB_NODE_COUNT}:ppn=16&#39;</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Edit any parts of this file that you know need to be changed for your machine.</span>
 <span class="n">writefile</span><span class="p">(</span><span class="s2">&quot;${EXEC_MACHINE}.txt&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">{</span>
 <span class="s2">    &quot;id&quot;: &quot;${EXEC_MACHINE}&quot;,</span>
-<span class="s2">    &quot;name&quot;: &quot;${MACH} (${MACHINE_USERNAME})&quot;,</span>
-<span class="s2">    &quot;description&quot;: &quot;The ${MACH} computer&quot;,</span>
-<span class="s2">    &quot;site&quot;: &quot;${NETWORK}&quot;,</span>
+<span class="s2">    &quot;name&quot;: &quot;${VM_MACHINE} (${MACHINE_USERNAME})&quot;,</span>
+<span class="s2">    &quot;description&quot;: &quot;The ${VM_MACHINE} computer&quot;,</span>
+<span class="s2">    &quot;site&quot;: &quot;jetstream-ci.org&quot;,</span>
 <span class="s2">    &quot;public&quot;: false,</span>
 <span class="s2">    &quot;status&quot;: &quot;UP&quot;,</span>
 <span class="s2">    &quot;type&quot;: &quot;EXECUTION&quot;,</span>
-<span class="s2">    &quot;executionType&quot;: &quot;HPC&quot;,</span>
-<span class="s2">    &quot;scheduler&quot; : &quot;CUSTOM_TORQUE&quot;,</span>
+<span class="s2">    &quot;executionType&quot;: &quot;CLI&quot;,</span>
+<span class="s2">    &quot;scheduler&quot; : &quot;FORK&quot;,</span>
 <span class="s2">    &quot;environment&quot;: null,</span>
 <span class="s2">    &quot;scratchDir&quot; : &quot;${SCRATCH_DIR}&quot;,</span>
 <span class="s2">    &quot;queues&quot;: [</span>
 <span class="s2">        {</span>
-<span class="s2">            &quot;customDirectives&quot; : &quot;${DIRECTIVES}&quot;,</span>
-<span class="s2">            &quot;name&quot;: &quot;${QUEUE}&quot;,</span>
+<span class="s2">            &quot;name&quot;: &quot;debug&quot;,</span>
 <span class="s2">            &quot;default&quot;: true,</span>
 <span class="s2">            &quot;maxJobs&quot;: 10,</span>
 <span class="s2">            &quot;maxUserJobs&quot;: 10,</span>
@@ -12811,28 +12591,30 @@ PROCS=16
 <span class="s2">    &quot;login&quot;: {</span>
 <span class="s2">        &quot;auth&quot;: {</span>
 <span class="s2">          &quot;username&quot; : &quot;${MACHINE_USERNAME}&quot;,</span>
-<span class="s2">          &quot;password&quot; : &quot;${MACHINE_PWD}&quot;,</span>
-<span class="s2">          &quot;type&quot; : &quot;PASSWORD&quot;</span>
+<span class="s2">          &quot;publicKey&quot; : &quot;${PUB_KEY}&quot;,</span>
+<span class="s2">          &quot;privateKey&quot; : &quot;${PRIV_KEY}&quot;,</span>
+<span class="s2">          &quot;type&quot; : &quot;SSHKEYS&quot;</span>
 <span class="s2">        },</span>
-<span class="s2">        &quot;host&quot;: &quot;${MACHINE}&quot;,</span>
+<span class="s2">        &quot;host&quot;: &quot;${VM_IPADDRESS}&quot;,</span>
 <span class="s2">        &quot;port&quot;: ${PORT},</span>
 <span class="s2">        &quot;protocol&quot;: &quot;SSH&quot;</span>
 <span class="s2">    },</span>
 <span class="s2">    &quot;maxSystemJobs&quot;: 50,</span>
 <span class="s2">    &quot;maxSystemJobsPerUser&quot;: 50,</span>
 <span class="s2">    &quot;storage&quot;: {</span>
-<span class="s2">        &quot;host&quot;: &quot;${MACHINE}&quot;,</span>
+<span class="s2">        &quot;host&quot;: &quot;${VM_IPADDRESS}&quot;,</span>
 <span class="s2">        &quot;port&quot;: ${PORT},</span>
 <span class="s2">        &quot;protocol&quot;: &quot;SFTP&quot;,</span>
 <span class="s2">        &quot;rootDir&quot;: &quot;/&quot;,</span>
 <span class="s2">        &quot;homeDir&quot;: &quot;${HOME_DIR}&quot;,</span>
 <span class="s2">        &quot;auth&quot;: {</span>
 <span class="s2">          &quot;username&quot; : &quot;${MACHINE_USERNAME}&quot;,</span>
-<span class="s2">          &quot;password&quot; : &quot;${MACHINE_PWD}&quot;,</span>
-<span class="s2">          &quot;type&quot; : &quot;PASSWORD&quot;</span>
+<span class="s2">          &quot;publicKey&quot; : &quot;${PUB_KEY}&quot;,</span>
+<span class="s2">          &quot;privateKey&quot; : &quot;${PRIV_KEY}&quot;,</span>
+<span class="s2">          &quot;type&quot; : &quot;SSHKEYS&quot;</span>
 <span class="s2">        }</span>
 <span class="s2">    },</span>
-<span class="s2">    &quot;workDir&quot;: &quot;${WORK_DIR}&quot;</span>
+<span class="s2">    &quot;workDir&quot;: &quot;/home/jovyan/work&quot;</span>
 <span class="s2">}&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -12850,7 +12632,7 @@ PROCS=16
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Writing file `shelob-exec-stevenrbrandt.txt&#39;
+<pre>Writing file `sandbox-exec-stevenrbrandt.txt&#39;
 </pre>
 </div>
 </div>
@@ -12861,7 +12643,7 @@ PROCS=16
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>systems-addupdate -F <span class="si">${</span><span class="nv">EXEC_MACHINE</span><span class="si">}</span>.txt
@@ -12881,7 +12663,7 @@ PROCS=16
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Successfully added system shelob-exec-stevenrbrandt
+<pre>Successfully added system sandbox-exec-stevenrbrandt
 </pre>
 </div>
 </div>
@@ -12892,7 +12674,7 @@ PROCS=16
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Test to see if this worked...</span>
@@ -12941,7 +12723,7 @@ Typically, it is a bash script.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[104]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">writefile</span><span class="p">(</span><span class="s2">&quot;drawgau-wrapper.txt&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;&quot;</span>
@@ -12977,33 +12759,9 @@ Typically, it is a bash script.</p>
 <span class="s2">  \$(\${AGAVE_JOB_CALLBACK_FAILURE})</span>
 <span class="s2">  exit 1</span>
 <span class="s2">fi</span>
-<span class="s2">if [ &quot;\${PBS_NODEFILE}&quot; = &quot;&quot; ]</span>
-<span class="s2">then</span>
-<span class="s2">  # When running on a system managed by Torque</span>
-<span class="s2">  # this variable should be set. If it&#39;s not,</span>
-<span class="s2">  # that&#39;s a problem.</span>
-<span class="s2">  echo &quot;The PBS_NODEFILE was not set&quot;</span>
-<span class="s2">  \$(\${AGAVE_JOB_CALLBACK_FAILURE})</span>
-<span class="s2">  exit 2</span>
-<span class="s2">fi</span>
-
-<span class="s2"># By default, the PBS_NODEFILE lists nodes multiple</span>
-<span class="s2"># times, once for each MPI process that should run</span>
-<span class="s2"># there. We only want one MPI process per node, so</span>
-<span class="s2"># we create a new file with &quot;sort -u&quot;.</span>
-<span class="s2">LOCAL_NODEFILE=nodefile.txt</span>
-<span class="s2">sort -u &lt; \${PBS_NODEFILE} &gt; \${LOCAL_NODEFILE}</span>
-<span class="s2">PROCS=\$(wc -l &lt; \${LOCAL_NODEFILE})</span>
-
-<span class="s2">if [ &quot;\${PROCS}&quot; = &quot;&quot; ]</span>
-<span class="s2">then</span>
-<span class="s2">  echo &quot;PROCS was not set&quot;</span>
-<span class="s2">  \$(\${AGAVE_JOB_CALLBACK_FAILURE})</span>
-<span class="s2">  exit 3</span>
-<span class="s2">fi</span>
 
 <span class="s2"># Execute our MPI command.</span>
-<span class="s2">mpirun -np \${PROCS} -machinefile \${LOCAL_NODEFILE} \${EXE_DIR}/drawgau \${parfile}</span>
+<span class="s2">mpirun -np 2 \${EXE_DIR}/drawgau \${parfile}</span>
 <span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -13032,7 +12790,7 @@ Typically, it is a bash script.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[105]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>files-mkdir -S <span class="si">${</span><span class="nv">STORAGE_MACHINE</span><span class="si">}</span> -N <span class="si">${</span><span class="nv">DEPLOYMENT_PATH</span><span class="si">}</span>
@@ -13075,7 +12833,7 @@ Uploading drawgau-wrapper.txt...
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">writefile</span><span class="p">(</span><span class="s2">&quot;test.txt&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;&quot;</span>
@@ -13109,7 +12867,7 @@ Uploading drawgau-wrapper.txt...
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In&nbsp;[84]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>files-mkdir -S <span class="si">${</span><span class="nv">STORAGE_MACHINE</span><span class="si">}</span> -N <span class="si">${</span><span class="nv">DEPLOYMENT_PATH</span><span class="si">}</span>
@@ -13153,7 +12911,7 @@ about the application in order to run it.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In&nbsp;[85]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">writefile</span><span class="p">(</span><span class="s2">&quot;${APP_NAME}.txt&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;&quot;</span>
@@ -13168,7 +12926,7 @@ about the application in order to run it.</p>
 <span class="s2">   &quot;templatePath&quot;:&quot;drawgau-wrapper.txt&quot;,</span>
 <span class="s2">   &quot;testPath&quot;:&quot;test.txt&quot;,</span>
 <span class="s2">   &quot;executionSystem&quot;:&quot;${EXEC_MACHINE}&quot;,</span>
-<span class="s2">   &quot;executionType&quot;:&quot;HPC&quot;,</span>
+<span class="s2">   &quot;executionType&quot;:&quot;CLI&quot;,</span>
 <span class="s2">   &quot;parallelism&quot;:&quot;SERIAL&quot;,</span>
 <span class="s2">   &quot;allocation&quot;:&quot;${ALLOCATION}&quot;,</span>
 <span class="s2">   &quot;modules&quot;:[],</span>
@@ -13223,7 +12981,7 @@ about the application in order to run it.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Writing file `drawgau-shelob-stevenrbrandt.txt&#39;
+<pre>Writing file `drawgau-sandbox-stevenrbrandt.txt&#39;
 </pre>
 </div>
 </div>
@@ -13234,7 +12992,7 @@ about the application in order to run it.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[86]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>apps-addupdate -F <span class="si">${</span><span class="nv">APP_NAME</span><span class="si">}</span>.txt
@@ -13254,7 +13012,7 @@ about the application in order to run it.</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Successfully added app drawgau-shelob-stevenrbrandt-1.0
+<pre>Successfully added app drawgau-sandbox-stevenrbrandt-1.0
 </pre>
 </div>
 </div>
@@ -13276,7 +13034,7 @@ The example for this tutorial is drawgau, a C++ program that uses MPI and does n
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[87]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">writefile</span><span class="p">(</span><span class="s2">&quot;drawgau.cpp&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;&quot;</span>
@@ -13368,7 +13126,7 @@ The example for this tutorial is drawgau, a C++ program that uses MPI and does n
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[88]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">writefile</span><span class="p">(</span><span class="s2">&quot;build.sh&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;&quot;</span>
@@ -13404,7 +13162,7 @@ The example for this tutorial is drawgau, a C++ program that uses MPI and does n
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="prompt input_prompt">In&nbsp;[89]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># These commands upload the source code, and the build command, then they</span>
@@ -13412,7 +13170,7 @@ The example for this tutorial is drawgau, a C++ program that uses MPI and does n
 <span class="o">!</span>files-mkdir -S <span class="si">${</span><span class="nv">STORAGE_MACHINE</span><span class="si">}</span> -N drawgau
 <span class="o">!</span>files-upload -F drawgau.cpp -S <span class="si">${</span><span class="nv">STORAGE_MACHINE</span><span class="si">}</span> drawgau/
 <span class="o">!</span>files-upload -F build.sh -S <span class="si">${</span><span class="nv">STORAGE_MACHINE</span><span class="si">}</span> drawgau/
-<span class="o">!</span>sshpass -f ~/pw.txt ssh <span class="si">${</span><span class="nv">MACHINE_USERNAME</span><span class="si">}</span>@<span class="si">${</span><span class="nv">MACHINE</span><span class="si">}</span> -p <span class="si">${</span><span class="nv">PORT</span><span class="si">}</span> bash --login ./drawgau/build.sh
+<span class="o">!</span>ssh <span class="si">${</span><span class="nv">MACHINE_USERNAME</span><span class="si">}</span>@<span class="si">${</span><span class="nv">VM_IPADDRESS</span><span class="si">}</span> -p <span class="si">${</span><span class="nv">PORT</span><span class="si">}</span> bash --login ./drawgau/build.sh
 </pre></div>
 
 </div>
@@ -13454,7 +13212,7 @@ Uploading build.sh...
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In&nbsp;[90]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>auth-tokens-refresh
@@ -13475,7 +13233,7 @@ Uploading build.sh...
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Token for agave.prod:stevenrbrandt successfully refreshed and cached for 14400 seconds
-16f931d4e37bf40e57f8a3e5251bc0
+d6829199cc82a936ffb33866b664f47
 </pre>
 </div>
 </div>
@@ -13494,7 +13252,7 @@ Uploading build.sh...
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In&nbsp;[91]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Define the minumum, maximum, and step size.</span>
@@ -13541,7 +13299,7 @@ SUBMITTING, QUEUED, and RUNNING</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[92]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># You can adjust text below to change the job name, the process count, the notifications, etc.</span>
@@ -13550,7 +13308,7 @@ SUBMITTING, QUEUED, and RUNNING</p>
 <span class="s2">  &quot;name&quot;:&quot;test-jobc-1&quot;,</span>
 <span class="s2">  &quot;appId&quot;: &quot;${APP_NAME}-1.0&quot;,</span>
 <span class="s2">  &quot;executionSystem&quot;: &quot;${EXEC_MACHINE}&quot;,</span>
-<span class="s2">  &quot;batchQueue&quot;: &quot;${QUEUE}&quot;,</span>
+<span class="s2">  &quot;batchQueue&quot;: &quot;debug&quot;,</span>
 <span class="s2">  &quot;maxRunTime&quot;: &quot;${MAX_TIME}&quot;,</span>
 <span class="s2">  &quot;nodeCount&quot;: 2,</span>
 <span class="s2">  &quot;processorsPerNode&quot;: 2,</span>
@@ -13602,7 +13360,7 @@ SUBMITTING, QUEUED, and RUNNING</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[106]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Submit a job with jobs-submit. Capture the output</span>
@@ -13629,8 +13387,8 @@ SUBMITTING, QUEUED, and RUNNING</p>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>OUTPUT=Successfully submitted job 5027773101861957145-242ac11b-0001-007
-JOB_ID=5027773101861957145-242ac11b-0001-007
+<pre>OUTPUT=Successfully submitted job 2129014736502320665-242ac11b-0001-007
+JOB_ID=2129014736502320665-242ac11b-0001-007
 </pre>
 </div>
 </div>
@@ -13641,7 +13399,7 @@ JOB_ID=5027773101861957145-242ac11b-0001-007
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[107]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Watch to see when the job is submitted.</span>
@@ -13672,16 +13430,11 @@ JOB_ID=5027773101861957145-242ac11b-0001-007
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>STAT=PENDING
 STAT=PENDING
-STAT=PROCESSING_INPUTS
+STAT=STAGING_INPUTS
 STAT=STAGED
 STAT=STAGED
 STAT=SUBMITTING
 STAT=SUBMITTING
-STAT=QUEUED
-STAT=QUEUED
-STAT=QUEUED
-STAT=QUEUED
-STAT=QUEUED
 STAT=FINISHED
 </pre>
 </div>
@@ -13693,7 +13446,7 @@ STAT=FINISHED
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In&nbsp;[108]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Check the job history. This may identify problems with the job submission.</span>
@@ -13716,7 +13469,7 @@ STAT=FINISHED
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>jobs-history 5027773101861957145-242ac11b-0001-007
+<pre>jobs-history 2129014736502320665-242ac11b-0001-007
 Job accepted and queued for submission.
 Attempt 1 to stage job inputs
 Identifying input files for staging
@@ -13724,10 +13477,11 @@ Copy in progress
 Job inputs staged to execution system
 Preparing job for submission.
 Attempt 1 to submit job
-Fetching app assets from agave://shelob-storage-stevenrbrandt/agave-deployment
-Staging runtime assets to agave://shelob-exec-stevenrbrandt//work/sbrandt/stevenrbrandt/job-5027773101861957145-242ac11b-0001-007-test-jobc-1
-HPC job successfully placed into shelob queue as local job 729983.mike3
-Job started running
+Fetching app assets from agave://sandbox-storage-stevenrbrandt/agave-deployment
+Staging runtime assets to agave://sandbox-exec-stevenrbrandt//work/sbrandt/stevenrbrandt/job-2129014736502320665-242ac11b-0001-007-test-jobc-1
+CLI job successfully forked as process id 26358
+CLI job successfully forked as process id 26358
+Job receieved duplicate RUNNING notification
 Job completed execution
 Job completed. Skipping archiving at user request.
 </pre>
@@ -13740,7 +13494,7 @@ Job completed. Skipping archiving at user request.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In&nbsp;[109]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># List the past five jobs you have run with Agave,</span>
@@ -13762,11 +13516,11 @@ Job completed. Skipping archiving at user request.
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>5027773101861957145-242ac11b-0001-007 FINISHED
-4404945880069771751-242ac11b-0001-007 FINISHED
-4763478136348217831-242ac11b-0001-007 FINISHED
-3676304398983687705-242ac11b-0001-007 FINISHED
-8615130242327047705-242ac11b-0001-007 FINISHED
+<pre>2129014736502320665-242ac11b-0001-007 FINISHED
+3981509521271230951-242ac11b-0001-007 FAILED
+5959879480088194585-242ac11b-0001-007 FAILED
+1238388195070317031-242ac11b-0001-007 FAILED
+2679346350900047385-242ac11b-0001-007 FINISHED
 </pre>
 </div>
 </div>
@@ -13777,7 +13531,49 @@ Job completed. Skipping archiving at user request.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In&nbsp;[110]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>jobs-output-list <span class="si">${</span><span class="nv">JOB_ID</span><span class="si">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>.agave.archive
+.agave.log
+agave
+drawgau-wrapper.txt
+drawgau0.txt
+drawgau1.txt
+input.txt
+test-jobc-1.err
+test-jobc-1.ipcexe
+test-jobc-1.out
+test-jobc-1.pid
+test.txt
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[111]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Fetch the submission script generated by Agave.</span>
@@ -13803,25 +13599,31 @@ Job completed. Skipping archiving at user request.
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>######################################################################## 100.0%
-#!/bin/bash
-#PBS -N test-jobc-1
-#PBS -o test-jobc-1-5027773101861957145-242ac11b-0001-007.out
-#PBS -e test-jobc-1-5027773101861957145-242ac11b-0001-007.err
-#PBS -A hpc_hyrel17
-#PBS -l cput=72:00:00
-#PBS -l walltime=72:00:00
-#PBS -q shelob
-#PBS -l nodes=2:ppn=16
+#!/bin/bash 
+
+############################################################## 
+# Agave Runtime IO Redirections 
+############################################################## 
+
+# Capture the PID of this job on the system for remote monitoring 
+echo $$ &gt; test-jobc-1.pid 
+
+# Pause for 2 seconds to avoid a callback race condition 
+sleep 2 
+
+# Redirect STDERR and STDOUT to the custom job output and error files 
+exec 2&gt;test-jobc-1.err 1&gt;test-jobc-1.out 
+
 
 ##########################################################
 # Agave Environment Settings 
 ##########################################################
 
 # Ensure we&#39;re in the job work directory 
-cd /work/sbrandt/stevenrbrandt/job-5027773101861957145-242ac11b-0001-007-test-jobc-1
+cd /work/sbrandt/stevenrbrandt/job-2129014736502320665-242ac11b-0001-007-test-jobc-1
 
 # Location of agave job lifecycle log file 
-AGAVE_LOG_FILE=/work/sbrandt/stevenrbrandt/job-5027773101861957145-242ac11b-0001-007-test-jobc-1/.agave.log
+AGAVE_LOG_FILE=/work/sbrandt/stevenrbrandt/job-2129014736502320665-242ac11b-0001-007-test-jobc-1/.agave.log
 
 
 ##########################################################
@@ -13839,7 +13641,7 @@ function agave_log_response() {
 } 2&gt;&amp;1 &gt;&gt; &#34;${AGAVE_LOG_FILE}&#34;
 
 # Callback to signal the job has started executing user-defined logic
-agave_log_response $(curl -sSk &#34;https://public.agaveapi.co/jobs/v2/trigger/job/5027773101861957145-242ac11b-0001-007/token/b15ebfd4-c0c0-471d-a43c-bf684e5eb1be/status/RUNNING?filter=id,status&#34; 2&gt;&amp;1) 
+agave_log_response $(curl -sSk &#34;https://public.agaveapi.co/jobs/v2/trigger/job/2129014736502320665-242ac11b-0001-007/token/dd8b982d-7116-43e6-9a34-1a8d6c481f44/status/RUNNING?filter=id,status&#34; 2&gt;&amp;1) 
 
 
 ##########################################################
@@ -13884,45 +13686,15 @@ then
   # Note: Job failure must be explicitly reported to
   # the Agave framework, otherwise it might
   # mistakenly believe the job is still running.
-  $(agave_log_response $(curl -sSk &#34;https://public.agaveapi.co/jobs/v2/trigger/job/5027773101861957145-242ac11b-0001-007/token/b15ebfd4-c0c0-471d-a43c-bf684e5eb1be/status/FAILED?filter=id,status&#34; 2&gt;&amp;1) 
+  $(agave_log_response $(curl -sSk &#34;https://public.agaveapi.co/jobs/v2/trigger/job/2129014736502320665-242ac11b-0001-007/token/dd8b982d-7116-43e6-9a34-1a8d6c481f44/status/FAILED?filter=id,status&#34; 2&gt;&amp;1) 
 
 
 )
   exit 1
 fi
-if [ &#34;${PBS_NODEFILE}&#34; = &#34;&#34; ]
-then
-  # When running on a system managed by Torque
-  # this variable should be set. If it&#39;s not,
-  # that&#39;s a problem.
-  echo &#34;The PBS_NODEFILE was not set&#34;
-  $(agave_log_response $(curl -sSk &#34;https://public.agaveapi.co/jobs/v2/trigger/job/5027773101861957145-242ac11b-0001-007/token/b15ebfd4-c0c0-471d-a43c-bf684e5eb1be/status/FAILED?filter=id,status&#34; 2&gt;&amp;1) 
-
-
-)
-  exit 2
-fi
-
-# By default, the PBS_NODEFILE lists nodes multiple
-# times, once for each MPI process that should run
-# there. We only want one MPI process per node, so
-# we create a new file with &#34;sort -u&#34;.
-LOCAL_NODEFILE=nodefile.txt
-sort -u &lt; ${PBS_NODEFILE} &gt; ${LOCAL_NODEFILE}
-PROCS=$(wc -l &lt; ${LOCAL_NODEFILE})
-
-if [ &#34;${PROCS}&#34; = &#34;&#34; ]
-then
-  echo &#34;PROCS was not set&#34;
-  $(agave_log_response $(curl -sSk &#34;https://public.agaveapi.co/jobs/v2/trigger/job/5027773101861957145-242ac11b-0001-007/token/b15ebfd4-c0c0-471d-a43c-bf684e5eb1be/status/FAILED?filter=id,status&#34; 2&gt;&amp;1) 
-
-
-)
-  exit 3
-fi
 
 # Execute our MPI command.
-mpirun -np ${PROCS} -machinefile ${LOCAL_NODEFILE} ${EXE_DIR}/drawgau input.txt
+mpirun -np 2 ${EXE_DIR}/drawgau input.txt
 
 
 ##########################################################
@@ -13930,7 +13702,7 @@ mpirun -np ${PROCS} -machinefile ${LOCAL_NODEFILE} ${EXE_DIR}/drawgau input.txt
 ##########################################################
 
 # Callback to signal the job has completed all user-defined logic
-agave_log_response $(curl -sSk &#34;https://public.agaveapi.co/jobs/v2/trigger/job/5027773101861957145-242ac11b-0001-007/token/b15ebfd4-c0c0-471d-a43c-bf684e5eb1be/status/CLEANING_UP?filter=id,status&#34; 2&gt;&amp;1) 
+agave_log_response $(curl -sSk &#34;https://public.agaveapi.co/jobs/v2/trigger/job/2129014736502320665-242ac11b-0001-007/token/dd8b982d-7116-43e6-9a34-1a8d6c481f44/status/CLEANING_UP?filter=id,status&#34; 2&gt;&amp;1) 
 
 
 </pre>
@@ -13943,14 +13715,14 @@ agave_log_response $(curl -sSk &#34;https://public.agaveapi.co/jobs/v2/trigger/j
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In&nbsp;[112]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Fetch the standard output of the job you just ran. By changing</span>
 <span class="c1"># the last three characters in the file name</span>
 <span class="c1"># from &quot;out&quot; to &quot;err&quot; you can fetch the standard error output.</span>
-<span class="o">!</span>jobs-output-get <span class="si">${</span><span class="nv">JOB_ID</span><span class="si">}</span> test-jobc-1-<span class="si">${</span><span class="nv">JOB_ID</span><span class="si">}</span>.out
-<span class="o">!</span>cat test-jobc-1-<span class="si">${</span><span class="nv">JOB_ID</span><span class="si">}</span>.out
+<span class="o">!</span>jobs-output-get <span class="si">${</span><span class="nv">JOB_ID</span><span class="si">}</span> test-jobc-1.out
+<span class="o">!</span>cat test-jobc-1.out
 </pre></div>
 
 </div>
@@ -13968,149 +13740,79 @@ agave_log_response $(curl -sSk &#34;https://public.agaveapi.co/jobs/v2/trigger/j
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>######################################################################## 100.0%
---------------------------------------
-Running PBS prologue script
---------------------------------------
-User and Job Data:
---------------------------------------
-Job ID:    729983.mike3
-Username:  sbrandt
-Group:     Admins
-Date:      28-Aug-2017 17:40
-Node:      shelob001 (19360)
---------------------------------------
-PBS has allocated the following nodes:
-
-shelob001
-shelob002
-
-A total of 32 processors on 2 nodes allocated
----------------------------------------------
-Check nodes and clean them of stray processes
----------------------------------------------
-Checking node shelob001 17:40:18 
-Checking node shelob002 17:40:20 
-Done clearing all the allocated nodes
-------------------------------------------------------
-Concluding PBS prologue script - 28-Aug-2017 17:40:20
-------------------------------------------------------
 Executing Draw Gau Code
 ==ENV=============
-MXM_LOG_LEVEL=fatal
 MKLROOT=/usr/local/compilers/Intel/composer_xe_2013.0.079/mkl
-MANPATH=/usr/local/compilers/GNU/gcc-4.7.2/man:/usr/local/compilers/Intel/composer_xe_2013.0.079/man/en_US:/usr/local/packages/openmpi/1.6.2/Intel-13.0.0/man:/usr/X11R6/man:/usr/share/man:/usr/share/locale/en/man:/usr/bin/man:/usr/local/share/man:/usr/local/man:/usr/local/packages/softenv/man
+MXM_LOG_LEVEL=fatal
 GCC_HOME=/usr/local/compilers/GNU/gcc-4.7.2
-HOSTNAME=shelob001
-PBS_VERSION=TORQUE-3.0.6
+MANPATH=/usr/local/compilers/GNU/gcc-4.7.2/man:/usr/local/compilers/Intel/composer_xe_2013.0.079/man/en_US:/usr/local/packages/openmpi/1.6.2/Intel-13.0.0/man:/usr/X11R6/man:/usr/share/man:/usr/share/locale/en/man:/usr/bin/man:/usr/local/share/man:/usr/local/man:/usr/local/packages/softenv/man
+HOSTNAME=shelob1
 INTEL_LICENSE_FILE=/usr/local/compilers/Intel:/usr/local/compilers/Intel/intel_fc_10.1/licenses:/usr/local/compilers/Intel/composer_xe_2013.0.079/licenses:/opt/intel/licenses
+TERM=dumb
 SHELL=/bin/bash
-HISTSIZE=1000
-PBS_JOBNAME=test-jobc-1
-LIBRARY_PATH=/usr/local/compilers/Intel/composer_xe_2013.0.079/compiler/lib/intel64:/usr/local/compilers/Intel/composer_xe_2013.0.079/mkl/lib/intel64
+HISTSIZE=90000
+SSH_CLIENT=129.114.0.133 53902 22
 PERL5LIB=/home/sbrandt/cpan-local/lib64/perl5
-PBS_ENVIRONMENT=PBS_BATCH
-OLDPWD=/home/sbrandt
+LIBRARY_PATH=/usr/local/compilers/Intel/composer_xe_2013.0.079/compiler/lib/intel64:/usr/local/compilers/Intel/composer_xe_2013.0.079/mkl/lib/intel64
 QTDIR=/usr/lib64/qt-3.3
-LANGUAGE_TERRITORY=en_US
 QTINC=/usr/lib64/qt-3.3/include
-PBS_O_WORKDIR=/work/sbrandt/stevenrbrandt/job-5027773101861957145-242ac11b-0001-007-test-jobc-1
-MIC_LD_LIBRARY_PATH=/usr/local/compilers/Intel/composer_xe_2013.0.079/compiler/lib/mic:/opt/intel/mic/coi/device-linux-release/lib:/opt/intel/mic/myo/lib:/usr/local/compilers/Intel/composer_xe_2013.0.079/mkl/lib/mic
-INCLUDE_PATH=/usr/local/compilers/Intel/composer_xe_2013.0.079/mkl/include
+LANGUAGE_TERRITORY=en_US
 openmpi_HOME=/usr/local/packages/openmpi/1.6.2/Intel-13.0.0
-USER=sbrandt
-PBS_TASKNUM=1
+INCLUDE_PATH=/usr/local/compilers/Intel/composer_xe_2013.0.079/mkl/include
+MIC_LD_LIBRARY_PATH=/usr/local/compilers/Intel/composer_xe_2013.0.079/compiler/lib/mic:/opt/intel/mic/coi/device-linux-release/lib:/opt/intel/mic/myo/lib:/usr/local/compilers/Intel/composer_xe_2013.0.079/mkl/lib/mic
+SSH_TTY=/dev/pts/1
 CUDA_HOME=/usr/local/packages/cuda/5.5.22
+USER=sbrandt
 LD_LIBRARY_PATH=/home/sbrandt/install/papi/lib:/usr/local/compilers/GNU/gcc-4.7.2/lib64:/usr/local/packages/cuda/5.5.22/lib64:/usr/local/packages/cuda/5.5.22/lib:/usr/local/compilers/Intel/composer_xe_2013.0.079/compiler/lib/intel64:/usr/local/compilers/Intel/composer_xe_2013.0.079/mkl/lib/intel64:/usr/local/packages/openmpi/1.6.2/Intel-13.0.0/lib:/usr/local/packages/openmpi/1.6.2/Intel-13.0.0/lib64
-PBS_O_HOME=/home/sbrandt
+LS_COLORS=
 CPATH=/usr/local/compilers/Intel/composer_xe_2013.0.079/mkl/include:/usr/local/compilers/Intel/composer_xe_2013.0.079/tbb/include
-PBS_WALLTIME=259200
-PBS_MOMPORT=15003
-PBS_GPUFILE=/var/spool/torque/aux//729983.mike3gpu
-PBS_O_QUEUE=shelob
-PGI=/usr/local/compilers/pgi
 NLSPATH=/usr/local/compilers/Intel/composer_xe_2013.0.079/compiler/lib/intel64/locale/en_US:/usr/local/compilers/Intel/composer_xe_2013.0.079/mkl/lib/intel64/locale/en_US
-PBS_O_LOGNAME=sbrandt
-MAIL=/var/spool/mail/sbrandt
+PGI=/usr/local/compilers/pgi
 PATH=/home/sbrandt/install/hpcviewer/bin:/home/sbrandt/install/papi:/home/sbrandt/install/perfexpert:/home/sbrandt/install/hpctoolkit-externals/bin:/home/sbrandt/install/hpctoolkit/bin:/home/sbrandt/bin:/home/sbrandt/install/ant/bin:/usr/lib64/qt-3.3/bin:/usr/local/compilers/GNU/gcc-4.7.2/bin:/usr/local/packages/cuda/5.5.22/bin:/usr/local/compilers/Intel/composer_xe_2013.0.079/bin/intel64:/usr/local/packages/openmpi/1.6.2/Intel-13.0.0/bin:/usr/local/packages/openmpi/1.6.2/Intel-13.0.0/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/X11R6/bin:/usr/local/packages/softenv/bin:/home/sbrandt/bin:/usr/local/packages/license/mathematica/11.0/bin:/opt/ibutils/bin:.:/home/sbrandt/bin
-PBS_O_LANG=en_US.UTF-8
-PBS_JOBCOOKIE=491F12AC98E7A4655BD20041745DC853
-CUDA_NIC_INTEROP=1
+MAIL=/var/spool/mail/sbrandt
 SOFTENV_ALIASES=/usr/local/packages/softenv-1.6.2/etc/softenv-aliases.sh
-PWD=/work/sbrandt/stevenrbrandt/job-5027773101861957145-242ac11b-0001-007-test-jobc-1
+CUDA_NIC_INTEROP=1
+PWD=/work/sbrandt/stevenrbrandt/job-2129014736502320665-242ac11b-0001-007-test-jobc-1
 LANG=en_US.UTF-8
-PBS_NODENUM=0
-MOABHOMEDIR=/usr/moab
 WHATAMI=Linux
-PBS_NUM_NODES=2
-PBS_O_SHELL=/bin/bash
-PBS_SERVER=mike3
+MOABHOMEDIR=/usr/moab
 PLATFORM=Linux
-PBS_JOBID=729983.mike3
-ENVIRONMENT=BATCH
-HISTCONTROL=ignoredups
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
-SOFTENV_LOAD=/usr/local/packages/softenv-1.6.2/etc/softenv-load.sh
+HISTCONTROL=ignoredups
 FMODULE_PATH=/usr/local/compilers/Intel/composer_xe_2013.0.079/mkl/include/intel64/lp64
-HOME=/home/sbrandt
-SHLVL=2
-LD_INCLUDE_PATH=/usr/local/compilers/GNU/gcc-4.7.2/include:/usr/local/packages/cuda/5.5.22/include:/usr/local/packages/openmpi/1.6.2/Intel-13.0.0/include
+SOFTENV_LOAD=/usr/local/packages/softenv-1.6.2/etc/softenv-load.sh
 SOFT_ORDER=2
+LD_INCLUDE_PATH=/usr/local/compilers/GNU/gcc-4.7.2/include:/usr/local/packages/cuda/5.5.22/include:/usr/local/packages/openmpi/1.6.2/Intel-13.0.0/include
+SHLVL=3
+HOME=/home/sbrandt
 PERFEXPERT_HPCTOOLKIT_HOME=/home/sbrandt/install/hpctoolkit
-PBS_O_HOST=shelob1
-PBS_VNODENUM=0
 LOGNAME=sbrandt
-CVS_RSH=ssh
-QTLIB=/usr/lib64/qt-3.3/lib
 VISUAL=vim
-PBS_QUEUE=shelob
-PBS_O_MAIL=/var/spool/mail/sbrandt
-MXM_SHM_RX_MAX_BUFFERS=32768
-OMP_NUM_THREADS=1
+QTLIB=/usr/lib64/qt-3.3/lib
+CVS_RSH=ssh
+SSH_CONNECTION=129.114.0.133 53902 204.90.47.30 22
 LESSOPEN=||/usr/bin/lesspipe.sh %s
-ARCH=Linux
+OMP_NUM_THREADS=1
+MXM_SHM_RX_MAX_BUFFERS=32768
 PROMPT_COMMAND=printf &#34;\033]0;%s\007&#34; &#34;${HOSTNAME}&#34; 
-PBS_NP=32
-PBS_NUM_PPN=16
-PBS_NODEFILE=/var/spool/torque/aux//729983.mike3
+ARCH=Linux
 G_BROKEN_FILENAMES=1
-PBS_O_PATH=/home/sbrandt/install/hpcviewer/bin:/home/sbrandt/install/papi:/home/sbrandt/install/perfexpert:/home/sbrandt/install/hpctoolkit-externals/bin:/home/sbrandt/install/hpctoolkit/bin:/home/sbrandt/bin:/home/sbrandt/install/ant/bin:/usr/lib64/qt-3.3/bin:/usr/local/compilers/GNU/gcc-4.7.2/bin:/usr/local/packages/cuda/5.5.22/bin:/usr/local/compilers/Intel/composer_xe_2013.0.079/bin/intel64:/usr/local/packages/openmpi/1.6.2/Intel-13.0.0/bin:/usr/local/packages/openmpi/1.6.2/Intel-13.0.0/sbin:/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/X11R6/bin:/usr/local/packages/softenv/bin:/home/sbrandt/bin:/usr/local/packages/license/mathematica/11.0/bin:/opt/ibutils/bin:.:/home/sbrandt/bin
 _=/bin/env
+OLDPWD=/work/sbrandt/stevenrbrandt/job-2129014736502320665-242ac11b-0001-007-test-jobc-1
 ==PWD=============
-/work/sbrandt/stevenrbrandt/job-5027773101861957145-242ac11b-0001-007-test-jobc-1
+/work/sbrandt/stevenrbrandt/job-2129014736502320665-242ac11b-0001-007-test-jobc-1
 ==JOB=============
 minx=-1
 maxx=1
 delx=0.01
 mpi size=2
 FILE: drawgau0.txt
-FILE: drawgau1.txt
 rank=0 minxp=-1 maxxp=0
+FILE: drawgau1.txt
 rank=1 minxp=0 maxxp=1
 ++ agave_datetime_iso
 ++ date +%Y-%m-%dT%H:%M:%S%z
-+ echo &#39;[2017-08-28T17:40:21-0500] {&#34;status&#34;:&#34;success&#34;,&#34;message&#34;:null,&#34;version&#34;:&#34;2.2.4-dev-r942a307&#34;,&#34;result&#34;:{&#34;id&#34;:&#34;5027773101861957145-242ac11b-0001-007&#34;,&#34;status&#34;:&#34;FINISHED&#34;}}&#39;
-------------------------------------------------------
-Running PBS epilogue script    - 28-Aug-2017 17:40:22
-------------------------------------------------------
-Checking node shelob001 (MS)
-Checking node shelob002 ok
-Checking node shelob001 ok
-------------------------------------------------------
-Concluding PBS epilogue script - 28-Aug-2017 17:40:26
-------------------------------------------------------
-Exit Status:     0
-Job ID:          729983.mike3
-Username:        sbrandt
-Group:           Admins
-Job Name:        test-jobc-1
-Session Id:      19359
-Resource Limits: ncpus=1,neednodes=2:ppn=16,nodes=2:ppn=16,walltime=72:00:00
-Resources Used:  cput=00:00:00,mem=608kb,vmem=13500kb,walltime=00:00:06
-Queue Used:      shelob
-Account String:  hpc_hyrel17
-Node:            shelob001
-Process id:      19989
-------------------------------------------------------
++ echo &#39;[2017-08-29T22:47:43-0500] {&#34;status&#34;:&#34;success&#34;,&#34;message&#34;:null,&#34;version&#34;:&#34;2.2.6-r4f1bf09&#34;,&#34;result&#34;:{&#34;id&#34;:&#34;2129014736502320665-242ac11b-0001-007&#34;,&#34;status&#34;:&#34;FINISHED&#34;}}&#39;
 </pre>
 </div>
 </div>
@@ -14121,7 +13823,7 @@ Process id:      19989
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="prompt input_prompt">In&nbsp;[113]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Most importantly, you can fetch the data files</span>
@@ -14168,7 +13870,7 @@ Process id:      19989
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="prompt input_prompt">In&nbsp;[114]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># This cell enables inline plotting in the notebook</span>
@@ -14186,7 +13888,7 @@ Process id:      19989
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="prompt input_prompt">In&nbsp;[115]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Load ascii data from a file</span>
@@ -14430,7 +14132,7 @@ EKTFXSmlQpAWd6WUCkH/B+AA5Mz9NTa3AAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="prompt input_prompt">In&nbsp;[116]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># By default, only you can see your jobs and job data</span>
@@ -14462,7 +14164,7 @@ EKTFXSmlQpAWd6WUCkH/B+AA5Mz9NTa3AAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In&nbsp;[117]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># permissions: READ, WRITE, READ_WRITE, ALL, NONE</span>
@@ -14494,7 +14196,7 @@ EKTFXSmlQpAWd6WUCkH/B+AA5Mz9NTa3AAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[69]:</div>
+<div class="prompt input_prompt">In&nbsp;[118]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>jobs-pems-list <span class="si">${</span><span class="nv">JOB_ID</span><span class="si">}</span>
@@ -14526,7 +14228,7 @@ ktraxler READ
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[70]:</div>
+<div class="prompt input_prompt">In&nbsp;[119]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># permissions: READ, WRITE, READ_WRITE, ALL, NONE</span>
@@ -14558,7 +14260,7 @@ ktraxler READ
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[71]:</div>
+<div class="prompt input_prompt">In&nbsp;[120]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>jobs-pems-list <span class="si">${</span><span class="nv">JOB_ID</span><span class="si">}</span>
@@ -14589,7 +14291,7 @@ ktraxler READ
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In&nbsp;[121]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>apps-pems-list <span class="si">${</span><span class="nv">APP_NAME</span><span class="si">}</span>-1.0
@@ -14610,7 +14312,6 @@ ktraxler READ
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>stevenrbrandt READ WRITE EXECUTE 
-ktraxler READ EXECUTE 
 stevenrbrandt READ WRITE EXECUTE 
 </pre>
 </div>
@@ -14622,7 +14323,7 @@ stevenrbrandt READ WRITE EXECUTE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In&nbsp;[122]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># permissions: READ, WRITE, EXECUTE, READ_WRITE, READ_EXECUTE, WRITE_EXECUTE, ALL, and NONE</span>
@@ -14654,7 +14355,7 @@ stevenrbrandt READ WRITE EXECUTE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In&nbsp;[123]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>apps-pems-list <span class="si">${</span><span class="nv">APP_NAME</span><span class="si">}</span>-1.0
@@ -14687,7 +14388,7 @@ stevenrbrandt READ WRITE EXECUTE
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In&nbsp;[124]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span><span class="nb">echo</span> Click the link to submit and run a job
@@ -14709,7 +14410,7 @@ stevenrbrandt READ WRITE EXECUTE
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Click the link to submit and run a job
-https://togo.agaveapi.co/app/#/apps/drawgau-shelob-stevenrbrandt-1.0/run
+https://togo.agaveapi.co/app/#/apps/drawgau-sandbox-stevenrbrandt-1.0/run
 </pre>
 </div>
 </div>

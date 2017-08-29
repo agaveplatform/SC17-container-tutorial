@@ -36,6 +36,10 @@ RUN tenants-init -t agave.prod -v
 
 ADD examples examples
 COPY start.sh /usr/local/bin
+USER jovyan
+RUN mkdir .jupyter
+COPY jupyter_notebook_config.py .jupyter/
+RUN chmod 700 .jupyter
 
 ARG BUILD_DATE
 ARG VERSION
@@ -51,3 +55,12 @@ LABEL org.agaveplatform.devops.architecture="x86_64"                            
       org.agaveplatform.devops.jupyter.version="5.0.x"                              \
       org.agaveplatform.devops.environment="training"                               \
       org.agaveplatform.training="jupyter"
+
+ENV VM_MACHINE sandbox
+ENV VM_IPADDRESS 204.90.47.30
+RUN mkdir -p /home/jovyan/.ssh
+RUN chmod 700 .ssh
+COPY keys/tutorial .ssh/id_rsa
+COPY keys/tutorial.pub .ssh/id_rsa.pub
+USER root
+RUN find /home/jovyan | xargs chown jovyan

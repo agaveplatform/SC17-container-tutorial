@@ -45,6 +45,9 @@ RUN /bin/bash -c "source activate python2" && \
 #RUN tenants-init -t agave.prod -v
 ADD  examples examples
 USER root
-RUN chown jovyan examples
+RUN chown jovyan examples examples/*
 COPY start.sh /usr/local/bin
 USER jovyan
+RUN mkdir .jupyter
+COPY jupyter_notebook_config.py .jupyter/
+RUN chmod 700 .jupyter

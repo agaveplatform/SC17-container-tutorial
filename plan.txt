@@ -1,0 +1,6 @@
+1. Intro & setup - Rion
+2. Agave intro via jupyter notebook - Steve
+3. Build, run, register, repeat: sciops - Rion
+4. Collaboration, containers, & concerns
+5. Visualization, sharing, publishing, integration
+6. Analysis, analytics, antipatterns

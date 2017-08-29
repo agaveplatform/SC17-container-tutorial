@@ -46,4 +46,5 @@ RUN /bin/bash -c "source activate python2" && \
 ADD  examples examples
 USER root
 RUN chown jovyan examples
+COPY start.sh /usr/local/bin
 USER jovyan

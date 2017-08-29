@@ -34,7 +34,7 @@ docker build -t agaveplatform/jupyter-datascience-notebook .
 The following command starts a container with the Notebook server listening for HTTP connections on port 8888 with a randomly generated authentication token configured.
 
 ```
-docker run -it --rm -p 8888:8888 agaveplatform/jupyter-datascience-notebook
+docker run -it --rm -p 8888:8888 --name jupyter-notebook agaveplatform/jupyter-datascience-notebook
 ```
 
 Take note of the authentication token included in the notebook startup log messages. Include it in the URL you visit to access the Notebook server or enter it in the Notebook login form.
@@ -169,5 +169,5 @@ You can bypass the provided scripts and specify your an arbitrary start command.
 
 ## Logging 
 
-All logs will be written to stdout and can be accessed via the `docker logs -f <container_name>` or `docker-compose logs -f` commands.
+All logs will be written to stdout and can be accessed via the `docker logs -f jupyter-notebook` or `docker-compose logs -f` commands.
 

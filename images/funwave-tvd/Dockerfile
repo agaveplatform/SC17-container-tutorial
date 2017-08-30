@@ -2,6 +2,8 @@ FROM agaveplatform/ssh-sandbox
 
 MAINTAINER Rion Dooley <dooley@tacc.utexas.edu>
 
+ENV TEST_USERNAME jovyan
+
 USER root
 
 # add build tools and python to the sandbox
@@ -22,9 +24,16 @@ RUN cd /home/$TEST_USERNAME && \
     git clone https://github.com/fengyanshi/FUNWAVE-TVD && \
     chown -R $TEST_USERNAME FUNWAVE-TVD
 
-RUN cd /home/$TEST_USERNAME/FUNWAVE-TVD/src && \
-    su $TEST_USERNAME -c "perl -p -i -e 's/FLAG_8 = -DCOUPLING/#$&/' Makefile" && \
-    su $TEST_USERNAME -c "make" && \
+USER $TEST_USERNAME
+ENV LD_LIBRARY_PATH="/usr/lib64/openmpi/lib"
+ENV MPI_FORTRAN_MOD_DIR="/usr/lib64/gfortran/modules/openmpi";
+ENV PATH="/usr/lib64/openmpi/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/funw/.local/bin:/home/funw/bin";
+ENV PKG_CONFIG_PATH="/usr/lib64/openmpi/lib/pkgconfig";
+
+WORKDIR /home/$TEST_USERNAME/FUNWAVE-TVD/src
+
+RUN perl -p -i -e 's/FLAG_8 = -DCOUPLING/#$&/' Makefile && \
+    make && \
     chmod 755 /home/$TEST_USERNAME && \
     rm -rf /home/openmpi-2.1.1*
 

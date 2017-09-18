@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VERSION: 0.2
+    image: agaveplatform/jupyter-notebook
+    command: start-notebook.sh --NotebookApp.token=''
+    mem_limit: 2048m
+    ports:
+      - 8888:8888
+    volumes:
+      - ./work:/home/jovyan/work
+      - ../sandbox/ssh:/home/jovyan/.ssh:ro
+      - $HOME/.agave:/home/jovyan/.agave

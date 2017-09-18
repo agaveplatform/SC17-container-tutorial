@@ -1,0 +1,44 @@
+version: '2'
+
+services:
+
+  jupyter:
+    build:
+      context: ./jupyter
+      dockerfile: Dockerfile
+      args:
+        VERSION: 0.2
+    image: agaveplatform/jupyter-notebook
+    command: start-notebook.sh --NotebookApp.token=''
+    mem_limit: 2048m
+    ports:
+      - 8888:8888
+    environment:
+      - 'VM_MACHINE=$VM_MACHINE'
+      - 'VP_IPADDRESS=$VP_IPADDRESS'
+      - 'USE_TUNNEL=True'
+    volumes:
+      - training-volume:/home/jovyan/work
+      - ./sandbox/ssh:/home/jovyan/.ssh:ro
+      - $HOME/.agave:/home/jovyan/.agave
+
+  sandbox:
+    build:
+      context: ./sandbox
+      dockerfile: Dockerfile
+      args:
+        VERSION: 0.2
+    image: agaveplatform/sc17-sandbox
+    mem_limit: 2048m
+    ports:
+     - 10222:8888
+    environment:
+      - 'VM_MACHINE=$VM_MACHINE'
+      - 'VP_IPADDRESS=$VP_IPADDRESS'
+      - 'USE_TUNNEL=True'
+    volumes:
+     - training-volume:/home/jovyan/work
+     - $HOME/.agave:/home/jovyan/.agave
+
+volumes:
+  training-volume:

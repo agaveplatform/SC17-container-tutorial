@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+
+  jupyter:
+    image: agaveplatform/jupyter-notebook
+    command: start-notebook.sh --NotebookApp.token=''
+    ports:
+      - 8888:8888
+    environment:
+      - USE_TUNNEL: true
+    volumes:
+      - training-volume:/home/jovyan/work
+      - ./sandbox/ssh:/home/jovyan/.ssh:ro
+      - $HOME/.agave:/home/jovyan/.agave
+
+  sandbox:
+    image: agaveplatform/sc17-sandbox
+    ports:
+     - 10022:8888
+    environment:
+     - USE_TUNNEL: true
+    volumes:
+     - training-volume:/home/jovyan/work
+     - $HOME/.agave:/home/jovyan/.agave
+
+
+volumes:
+  training-volume:

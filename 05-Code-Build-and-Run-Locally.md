@@ -1,4 +1,4 @@
-> This document is also available as an interactive Jupyter notebook ([05-Code-Build-and-Run-Locally.ipynb](notebooks/05-Code-Build-and-Run-Locally.ipynb)) where you can build, run, and interact with the application code directly.  
+> This document is also available as an interactive Jupyter notebook ([05-Code-Build-and-Run-Locally.ipynb](content/notebooks/05-Code-Build-and-Run-Locally.ipynb)) where you can build, run, and interact with the application code directly.  
 
 # FUNWAVE-TVD
 

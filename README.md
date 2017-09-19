@@ -27,8 +27,10 @@ In this tutorial, we combine best practices and lessons learned while on-boardin
 - 04: [SciOps and our Sample Application](04-SciOps-and-Sample-Application.md)
 - 05: [Code, Build, and Run Locally](05-Code-Build-and-Run-Locally.md)
 - 06: [Containerize Existing Applications](06-Containerize-Existing-Applications.md)
-- 07: [Registries, Storage, and App Catalogues](07-Registries-Storage-and-App-Catalogues.md)
+
 - 07: [Automation and Execution]()
+
+- 07: [Registries, Storage, and App Catalogues](07-Registries-Storage-and-App-Catalogues.md)
 * Agave
 * CI/CD
 * Image publishing
@@ -42,27 +44,5 @@ In this tutorial, we combine best practices and lessons learned while on-boardin
 - 11: [Benchmarking and Performance Considerations]()
 - 12: [Functions, Microcodes, and Exascale]()
 - 13: [Homework an Further Reading]()
-
-
-- 04: [Resources and Hello, World!](04-Resources-and-Hello-World.md)
-- 05: [Services, Routing and a Complete Example](05-Services-Routing-Complete-Example.md)
-- 06: [Project Administration](06-Project-Administration.md)
-- 08: [S2I Introduction](08-S2I-Introduction.md)
-
-
-
-
-- 10: [Wiring Components](10-Wiring-Components.md)
-
-
-- 11: [Rollback/Activate and Code Lifecycle](11-Rollback-Activate-Lifecycle.md)
-- 12: [PHP Application Example With
-    Storage](12-PHP-Application-Example-With-Storage.md)
-- 13: [Customized Build and Run
-    Processes](13-Customized-Build-and-Run-Processes.md)
-- 14: [Lifecycle Pre and Post Deployment
-    Hooks](14-Lifecycle-Pre-and-Post-Deployment-Hooks.md)
-- 15: [JBoss EAP Example](15-JBoss-EAP-Example.md)
-
 - 90: [Appendix A](90-Appendix-A.md)
 - 99: [References](99-References.md)

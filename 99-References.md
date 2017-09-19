@@ -22,12 +22,17 @@
  * Beanstalk
 
 ## Container technologies
-* Docker
-* Singularity
-* Shifter
-* [Singularity vs *](http://singularity.lbl.gov/faq#cant-you-do-this-with-docker)
-* [Docker vs Singularity vs Shifter](http://geekyap.blogspot.com/2016/11/docker-vs-singularity-vs-shifter-in-hpc.html)
+* [Docker](https://docker.com)  
+* [Singularity](http://singularity.lbl.gov/)  
+* [Shifter](https://www.nersc.gov/research-and-development/user-defined-images/)  
+* [LXC](https://linuxcontainers.org/)  
+* [OpenVZ](https://openvz.org/Main_Page)  
+* [rkt]((https://coreos.com/rkt)  
 
+### Comparison articles
+* [Singularity FAQ](http://singularity.lbl.gov/faq#cant-you-do-this-with-docker)
+* [Docker vs Singularity vs Shifter](http://geekyap.blogspot.com/2016/11/docker-vs-singularity-vs-shifter-in-hpc.html)  
+* [rkt vs other projects](https://coreos.com/rkt/docs/latest/rkt-vs-other-projects.html)  
 
 ## Cloud services
 * What is the cloud?
@@ -39,4 +44,5 @@
 
 ## DevOps
 * [What is DevOps?](https://en.wikipedia.org/wiki/DevOps)
-* [Continuous integration services](https://github.com/ligurio/Continuous-Integration-services/blob/master/continuous-integration-services-list.md)
+* [DevOps microsite by Atlassian](https://www.atlassian.com/devops)
+* [Continuous integration services](https://github.com/ligurio/Continuous-Integration-services/blob/master/continuous-integration-services-list.md)  

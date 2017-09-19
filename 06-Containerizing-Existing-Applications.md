@@ -1,15 +1,19 @@
-> This document is also available as an interactive Jupyter notebook ([06-Containerize-Existing-Applications.ipynb](notebooks/06-Containerize-Existing-Applications.ipynb)) where you can build, run, and interact with the application containers directly.  
+> This document is also available as an interactive Jupyter notebook ([06-Containerize-Existing-Applications.ipynb](content/notebooks/06-Containerize-Existing-Applications.ipynb)) where you can build, run, and interact with the application containers directly.  
 
-# Container technology options
-Container technologies have exploded over the last 5 years. In the scientific computing space, three technologies have moved to the forefront: [Docker](https://docker.com), [Singularity](http://singularity.lbl.gov/), and [Shifter](). 
+# Container technology
+Container technologies have exploded over the last 5 years. In the scientific computing space, [Docker](https://docker.com) dominates overall utilization and adoption. Within the HPC space, where concerns over security, performance, and legacy integration are primary, [Singularity](http://singularity.lbl.gov/) has arisen to fill the need Docker did not satisfy. While there are certainly other container technologies in use today, we will focus our attention on leveraging the synergy between Docker and Singularity in realizing a SciOps environment for this tutorial.
 
-## Docker
+We assume that the user has a passing familiarity with at least one of these two technologies. Where appropriate, we will provide specific commentary on a specific technology with respect to the task at hand. Deep discussion of the features, strengths, and weaknesses of each technology is beyond the scope of this tutorial. We refer you to the [References section](99-References.md#Container-technologies) for further reading.
 
-## Singularity
+> This is by no means a complete list. Shifter, LXC, and OpenVZ are also commonly used in HPC environments, however given the length of this tutorial, the audience at SC, and the rate of adoption seen by Singularity at the time of this tutorial, we limit our scope in this tutorial to Docker and Singularity. Please see the [References section](99-References.md#Container-technologies) for links to articles, projects, and futher reading on these and other container technologies.  
 
-## Shifter
 
 # Portability in practice
+Both Docker and Singularity, for the most part, live up to their claim of build once, run anywhere portability. Two specific exceptions to this are worth noting.
+
+## Runtime not included
+
+## Kernels, hardware, and proprietary software
 
 # SciOps considerations
 

@@ -9,21 +9,55 @@ We assume that the user has a passing familiarity with at least one of these two
 
 
 # Portability in practice
-Both Docker and Singularity, for the most part, live up to their claim of build once, run anywhere portability. Two specific exceptions to this are worth noting.
+Both Docker and Singularity, for the most part, live up to their claim of build once, run anywhere portability. Four specific exceptions to this are worth noting.
 
 ## Runtime not included
+Regardless of the container technology, the container images created from a `docker build` or `singularity bootstap` operation are ***not*** self-contained executables. They require their respective container engines to setup and start the container process(es). Thus, unless the Docker or Singularity engines are installed on your desired execution system, you will not be able to run a container.
 
-## Kernels, hardware, and proprietary software
+It is worth mentioning that the contrary is not necessarily true. Docker is currently the 800lb gorilla in the container space and, as such, does not support runtimes other than their own Docker Engine**. Competing container technologies such as Singularity, Rocket, and OpenVZ do have the ability to run Docker images either directly or indirectly after a  preprocessing step, or directly.
+
+> ** Technically Docker follows the [Open Container Initiative Runtime Specification](https://github.com/opencontainers/runtime-spec). founded and assures comthey support the RunC spec in their upstream distribution, but that is largely a community driven implementation of their own engine)
+
+## Binary compatibility
+The usual caveats around binary portability across kernels also holds with containers. If the host OS cannot support the container kernel, the container cannot run. Thus, a FreeBSD image will not run on a POWER system, and a CentOS7 image will likely not run on a CentOS 5 host. Depending on the container technology, there may be exceptions to this rule. The notable exception being Docker for Windows 10 Pro and higher which starts up a minimal Hyper-V Linux VM capable of running linux containers. Aside from these edge cases, it is safe to say that container portability is generally reliable across Linux systems.
+
+## Hardware dependencies
+It is not uncommon for HPC systems to have unique compilers, drivers, and workarounds installed to squeeze as much performance as possible out of their hardware. This generally is not a problem for containers built and run on those systems. It can cause problems when attempting to run the containers on hosts missing the particular hardware or software present on the build system. You might have seen a similar situation occur if you have ever upgraded a video card, or tried to install a new app on a phone more than a few years old.
+
+## Licensing requirements
+All licensing and legal concerns are implicitly built into a container. If a license server is required to run a container on one host, the lack of that license server on another host will prevent the container from running. While this is not a technical issue, it still impacts the portability of a container and, therefor, is worth mentioning.
+
 
 # SciOps considerations
 
-* attribution
-* transparency
-* documentation
-* publication
-* usability
-* conventions
-* benchmarks
+## Attribution
+Every container technology supports a mechanism for adding metadata into an image. Including information about the author(s), projects, funding sources, contact information, etc. allows you to receive proper credit for your work.
+
+Leveraging platform infrastructure and using common base images such as BioContainers, Science Apps, and AlogRun, which have informations publishing services bundled into the images, allow usage information as well as attribution information to be collected and made available to authors over time.
+
+## Transparency
+Transparency in an image allows trust to build between the author and those using the image. Transparency is also critical for a community to select and rally around a canonical application image. Publishing build instructions, properly tagging and versioning the image, and bundling documentation all allow people on the outside looking in to feel comfortable with incorporating the image into their own work.  
+
+## Documentation  
+Without documentation, an image is little more than a black box. Documentation makes the difference between a potential user considering use of your image or scrolling on to the next page in the catalog. Documentation should come in at least two forms. First, the image repository should include a README describing what the image contains, how to use the image, how to build the image, links to the source code repository, license, and maintainer contact info. Second, the image should contain a man or help page that can be invoked by default to show the user how to run the code. A popular convention is to make the application executable run by default, so a new user can always find out how to properly invoke an app by simply starting the container with a `-h` command.
+
+## Publication
+People need to be able to find your image if they are going to run your container, so while including a Dockerfile or Singularity build file in your code repository is a great first step, to get broader adoption, consider publishing your image to one of the public registries where others can search and browse for it. Of course, when you do this, think through how, if at all, you will version, document, and support the published image over time.
+
+## Usability  
+Containerizing your application gives you the opportunity to control, and often times, improve the user and developer experience associated with your application code. Wrapping your app invocation in a script that handles input validation, file format conversions, sets default values, output transformation, etc. can go a long way to make your application more approachable and open it up to a new audience.
+
+Complex application bundles like [Trinity](https://github.com/trinityrnaseq/trinityrnaseq/wiki), containerized pipelines like [BIDS](http://bids-apps.neuroimaging.io/about/) are sufficiently complicated that it is rare that any one person would leverage all aspects of the application. It is worth considering whether potential users could benefit from the existence of several versions of the image, each preconfigured for a specific use of the tool.
+
+## Conventions  
+Along the lines of the usability topic, it is worth considering what conventions can be used to make your application image more approachable. It may be that your potential user community is already so familiar with the application that the best conventions are to simply expose the application exactly as it is. However, it is possible that some of the concepts utilize by your app do not carry over cleanly to a container environment. Inputs, for example, may be better served by allowing users to specify them as arguments rather than inferring a hard coded file name or looking in a specific directory within the container.
+
+Language conventions are another area where you may look for opportunities to adopt conventions. Every language has its own argument parsing library, and every library has slightly different ways of handling arguments, flags, parameters, and ordering. Given that your application is essentially language agnostic when run as a container, you have an opportunity to wrap your application with command line syntax with which your target audience and optimally identify.
+
+## Benchmarks
+Generally speaking, there is not much of a performance hit when using containers vs running natively. Most analysis show 1-2% overhead when networking is not involved. However, that does not set expectations about what kind of performance to expect when running your image. Your users may be used to a version compiled with other flags, optimized for other uses, with different defaults set, or without particular modules loaded. The result could be a significant disparity between their experience running your image and the native installation they are used to.
+
+Adding benchmark data to your image, when possible, so others can do an apples to apples comparison of your image vs one they are familiar with can help them understand the implications of using your image. Of course, including your image build file and a README detailing any significant build configuration options is also a good idea. Whenever possible, err on the side of transparency and clarity about what and how your image should be used.
 
 # Base image basics
 

@@ -79,6 +79,7 @@ Fortunately, a healthy amount of work has gone into defining and field testing b
 
 # Containerizing an example app
 
+The following sections will build our application images using Docker and Singularity respectively. The resulting images will be the basis for the remainder of the the tutorial, so if you have trouble building these images, please stop and ask for help. 
 
 ## Docker build
 
@@ -114,13 +115,11 @@ WORKDIR $HOME/FUNWAVE-TVD/src
 
 ```
 
-To build the image, we invoke the `docker build` command, providing a name and tag for the image. In the next section, we will discuss the choice of tags an their role in the provenance chain, but for now, we will leave the tag blank and inherit the default, *"latest"* tag.  
+To build the image, we invoke the `docker build` command, providing a name and tag for the image. We will discuss the choice of tags and their role in the provenance chain in the [Automation and Execution](07-Automation-and-Execution) section, but for now, we will leave the tag blank and inherit the default, *"latest"* tag.  
 
 ```
 docker build -rm -t funwave-tvd $(pwd)
 ```  
-
-
 
 ## Singularity build
 

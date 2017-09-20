@@ -19,6 +19,8 @@ You will need an account on the Agave Platform to login to your tutorial noteboo
 
 > [https://togo.agaveaplatform.org/auth/#/signup](https://togo.agaveaplatform.org/auth/#/signup)
 
+*Note: Please do not use special characters in your password.*
+
 *Note: You will need to confirm your email address to activate your account.*
 
 ## Tutorial VM

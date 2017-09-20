@@ -5,7 +5,7 @@ Container technologies have exploded over the last 5 years. In the scientific co
 
 We assume that the user has a passing familiarity with at least one of these two technologies. Where appropriate, we will provide specific commentary on a specific technology with respect to the task at hand. Deep discussion of the features, strengths, and weaknesses of each technology is beyond the scope of this tutorial. We refer you to the [References section](99-References.md#Container-technologies) for further reading.
 
-> This is by no means a complete list. Shifter, LXC, and OpenVZ are also commonly used in HPC environments, however given the length of this tutorial, the audience at SC, and the rate of adoption seen by Singularity at the time of this tutorial, we limit our scope in this tutorial to Docker and Singularity. Please see the [References section](99-References.md#Container-technologies) for links to articles, projects, and futher reading on these and other container technologies.  
+> This is by no means a complete list. Shifter, LXC, and OpenVZ are also commonly used in HPC environments, however given the length of this tutorial, the audience at SC, and the rate of adoption seen by Singularity at the time of this tutorial, we limit our scope in this tutorial to Docker and Singularity. Please see the [References section](99-References.md#Container-technologies) for links to articles, projects, and further reading on these and other container technologies.  
 
 
 # Portability in practice
@@ -60,12 +60,22 @@ Generally speaking, there is not much of a performance hit when using containers
 Adding benchmark data to your image, when possible, so others can do an apples to apples comparison of your image vs one they are familiar with can help them understand the implications of using your image. Of course, including your image build file and a README detailing any significant build configuration options is also a good idea. Whenever possible, err on the side of transparency and clarity about what and how your image should be used.
 
 # Base image basics
+Chances are that if you are building software of any meaningful complexity, you are leveraging one or more dependency management systems for your language of choice. A full discussion about application portability, software engineering, and software sustainability over time are beyond the scope of this talk. We bring them up here to highlight the many lessons learned from those fields of study over the years and point out that many of the solutions to those problems are difficult to address directly within your application. Things like dependency validation, dependency conflict resolution, security traces, long-tem asset hosting, project sunsets, and technology changes over time can all impact to simply build your application over time, let alone maintain it.
 
-## Base images vs dependency management
+## Base images > dependency management
+Base images allow you to standardize and snapshot the common dependencies, processes, configurations, and environments required to build your application. More than simply providing a standard operating system or toolchain, base images can be:
+
+* Places where you standardize your third-party dependencies, alleviating the requirement to call out to a third-party service.
+* Checkpoints to automate code quality and consistency.
+* [**TODO**] etc, etc, etc
 
 ## When to trust (and when not to)
 
+
 ## Leveraging community efforts
+Fortunately, a healthy amount of work has gone into defining and field testing base images in many different domains. From BioContainers to Docker's Trusted Registry to CERN's Scientific Linux to Jupyter's Data Science images, a wealth of options are out there to help you get off on the right foot. Even if your situation is such that you cannot adopt them in whole, there is a wealth of information to learn from the authors on what goes into a good base image.
+
+> Further discussion on the challenges of long-term software sustainability, maintenance, and accessibility can be found in the [References section](99-References.md#Scientific-Software-Engineering).
 
 # Containerizing an example app
 

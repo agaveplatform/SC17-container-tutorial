@@ -1,8 +1,8 @@
 # Infrastructure
 
-During this tutorial you will primarily interact with two interfaces which will orchestrate multiple cloud services to provide the of the low-level details required to accomplish our goals for today. We will be running all the services and development machines used in today's tutorial on the Jetstream cloud.
+During this tutorial you will primarily interact with two interfaces which will orchestrate multiple cloud services to provide the of the low-level details required to accomplish our goals for today. <span style='color: red'>What are the "two interfaces?"</span> We will be running all the services and development machines used in today's tutorial on the Jetstream cloud.
 
-> If you would like to deploy the tutorial infrastructure yourself, please consult the [Appendix A](90-Appendix-A.md) for more details.  
+> If you would like to deploy the tutorial infrastructure yourself on your own machine, please consult the [Appendix A](90-Appendix-A.md) for more details.  
 
 # Architecture
 The examples in this tutorial assume the following architecture.
@@ -11,27 +11,29 @@ The examples in this tutorial assume the following architecture.
 * Build system (shared)
 
 ## Training system  
-Each user has their own "Training system." Behind the scenes, a training system is just a dedicated VM provisioned on the Jetstream cloud. On that VM are two Docker containers providing the sandbox and notebook environments the user will interact with throughout the tutorial. Both the notebook and the sandbox container share a common file system mounted at the user's home directory.
+Each user has their own "Training system," which will be created shortly after you create your Agave account. Behind the scenes, a training system is just a dedicated Virtual Machine (VM) provisioned on the Jetstream cloud. On that VM are two Docker containers providing the sandbox and notebook environments the user will interact with throughout the tutorial. Both the notebook and the sandbox container share a common file system mounted at the user's home directory.
 
 The Jupyter server is available from their browser at:  
 
 ```  
-https://<username>-jupyter.training.public.agaveplatform.org.  
+https://<agave-username>-jupyter.training.public.agaveplatform.org.  
 ```  
+
+*Note: Please avoid using the Safari browser.*
 
 The sandbox is accessible via *ssh* and *sftp*. Users may login to their sandbox using any of the following methods:
 
 ```
 # Publicly available. Authenticate with the user's Agave Platform password
-ssh training@<username>-sandbox.training.public.agaveplatform.org
+ssh training@<agave-username>-sandbox.training.public.agaveplatform.org
 
-# Publicy available. Each user's private key is in the home directory of their
+# Publicly available. Each user's private key is in the home directory of their
 # Jupyter server.
-ssh -i /path/to/private/key.pem training@<username>-sandbox.training.public.agaveplatform.org
+ssh -i /path/to/private/key.pem training@<agave-username>-sandbox.training.public.agaveplatform.org
 
 # From the jupyter web terminal. Passwordless ssh has already been configured
 # and is available out of the box.
-ssh training@<username>-sandbox.training.public.agaveplatform.org
+ssh training@<agave-username>-sandbox.training.public.agaveplatform.org
 
 # From the jupyter web terminal. Passwordless ssh has already been configured.
 # The sandbox container is visible via the internal hostname `sandbox`
@@ -43,14 +45,17 @@ The "build system" hosts a continuous integration server providing automated
 builds of your code and doubles as a private registry host for both Docker and
 Singularity images.
 
+<span style='color:red'>Do the users interact with this system in any way? Or is it behind-the-scenes magic?</span>
 
 # Cloud Services and Platforms
+
+These are technologies which you will make direct use of during the tutorial.
 
 ## Jupyter
 
 The Jupyter is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text. Uses include: data cleaning and transformation, numerical simulation, statistical modeling, machine learning and much more.
 
-[Website](http://jupyter.org/) [Project repository](https://github.org/jupyter)
+[Website](http://jupyter.org/) [Project repository](https://github.com/jupyter)
 
 We will be using a Jupyter Notebook as the primary web interface for this workshop. Several notebooks have been provided to you, in advance, to guide you through the workshop. After the workshop, you may use our public Docker image to recreate the notebook server and repeat the workshop, or continue on with your own work at your leisure.   
 

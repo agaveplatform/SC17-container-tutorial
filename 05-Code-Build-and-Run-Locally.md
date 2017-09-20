@@ -7,12 +7,12 @@
 We will be using FUNWAVE as our example code, rather than the usual `/bin/date` or `cowsay` examples because it represents a real-world code with significant dependencies and code complexity as well as the ability to leverage OpenMP to run across multiple nodes. We will start from a the project source code, build an run the code locally on our workshop VM, then walk you through the process of containerizing, automating, and publishing the code in a portable manner.
 
 ## Requirements
-> **TODO:** @stevenrbrandt Would you please fill in the usual blurb here  
+Funwave requires a modern fortran compiler, the C-preprocessor and a version of MPI.
 
 Your sandbox has been preconfigured with all the requirements needed to build and run FUNWAVE-TVD. If you are following along in the jupyter hub, you can skip straight to the installation step.
 
 ## Installation
-> **TODO:** @stevenrbrandt Would you please fill in the usual blurb here
+Funwave ships with a Makefile that will build the Funwave executable providing you have an MPI-aware fortran compiler named `mpif90` in your path.
 
 ```
 cd ~/FUNWAVE_TVD/src

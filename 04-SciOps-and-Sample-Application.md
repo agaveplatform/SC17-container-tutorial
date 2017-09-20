@@ -20,7 +20,7 @@ SciOps is a software development and digital science methodology that emphasizes
 * Promote - advertise results for external review and accessability
 * Preserve - store results for long-term archiving
 
-![alt text](sciops_big_picture.png "SciOps big picture diagram")
+![alt text](content/sciops_big_picture.png "SciOps big picture diagram")
 
 We will reference each of these steps as we progress through the tutorial demonstrating their hands-on application.
 

@@ -42,7 +42,7 @@
 ## Best practices  
 * [Software Carpentry](https://software-carpentry.org/)  
 * [Best Practices for Scientific Computing](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001745)  
-* [Computational Science in the Cloud](https://www.tacc.utexas.edu/education/institutes/computational-science-in-the-cloud)  
+* [Computational Science in the Cloud](https://www.tacc.utexas.edu/education/institutes/computational-science-in-the-cloud)/?
 
 
 

@@ -25,7 +25,3 @@ You will need an account on the Agave Platform to login to your tutorial noteboo
 We have already created a VM for each of you to use in this workshop on Jetstream. Your VM will serve as a development, compute, and storage system as we work through the material. Once you have confirmed your Agave and Github accounts, please login to your notebook server at
 
 > [https://&lt;username&gt;-jupyter.training.agaveaplatform.org](https://<username>-jupyter.training.agaveaplatform.org)  
-
-
-
-In the next section we will take a brief tour of the Agave CLI before putting it to use in our SciOps example.

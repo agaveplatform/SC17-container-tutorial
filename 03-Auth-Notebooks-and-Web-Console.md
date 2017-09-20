@@ -22,6 +22,7 @@ Inside of the `examples` directory, you will find several notebooks to help you 
 
 ## Sandbox environment
 The sandbox has the following pre-installed:
+* [TODO] @stevenrbrandt please review
 * build-essentials
 * g++
 

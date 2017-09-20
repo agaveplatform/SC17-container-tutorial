@@ -27,10 +27,7 @@ In this tutorial, we combine best practices and lessons learned while on-boardin
 - 04: [SciOps and our Sample Application](04-SciOps-and-Sample-Application.md)
 - 05: [Code, Build, and Run Locally](05-Code-Build-and-Run-Locally.md)
 - 06: [Containerize Existing Applications](06-Containerize-Existing-Applications.md)
-
-- 07: [Automation and Execution]()
-
-- 07: [Registries, Storage, and App Catalogues](07-Registries-Storage-and-App-Catalogues.md)
+- 07: [Automation, Registries, and App Catalogues](07-Automation-Registries-and-App-Catalogues)
 * Agave
 * CI/CD
 * Image publishing

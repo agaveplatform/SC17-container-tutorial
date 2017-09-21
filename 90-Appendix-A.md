@@ -57,7 +57,7 @@ The "cluster node" serve as compute system for the Slurm cluster. They are
 
 ## Requirements
 ### Docker
-The provisioning and management of the tutorial services is via a Docker. You
+The provisioning and management of the tutorial services is via a Docker Container. You
 will need the following installed on your system to complete the installation.
 
 * Docker 1.13 or greater

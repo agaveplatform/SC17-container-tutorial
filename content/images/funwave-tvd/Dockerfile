@@ -7,17 +7,18 @@ ENV TEST_USERNAME jovyan
 USER root
 
 # add build tools and python to the sandbox
-RUN apt-get install -y --allow-unauthenticated build-essential findutils python3 python3-pip wget make git patch flex gfortran && \
+RUN apt-get update && \
+    apt-get install -y --allow-unauthenticated build-essential findutils python3 python3-pip wget make git patch flex gfortran && \
+    apt-get clean 
+
+WORKDIR /home
+RUN  wget https://www.open-mpi.org/software/ompi/v2.1/downloads/openmpi-2.1.1.tar.gz && \
+    tar xzvf openmpi-2.1.1.tar.gz && \
+    cd /home/openmpi-2.1.1 && \
+    ./configure &&  \
+    make -j 5 install && \
     cd /home && \
-    wget https://www.open-mpi.org/software/ompi/v2.1/downloads/openmpi-2.1.1.tar.gz && \
-    tar xzvf openmpi-2.1.1.tar.gz
-
-# add openmpi 2.1.1
-RUN cd /home/openmpi-2.1.1 && \
-    ./configure
-
-RUN cd /home/openmpi-2.1.1 && \
-    make -j 5 install
+    rm -fr openmpi-2.1.1
 
 USER $TEST_USERNAME
 

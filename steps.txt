@@ -3,8 +3,10 @@
 2. create github account if they dont’ have one
 
 3. claim the VM we assigned to them ahead of time
+  Rion creates accounts on the VM's on Jetstream
+  based on the user's agave credentials.
 
-4. login to a hub
+4. login to a hub (a.k.a. a Jupyterhub)
 
 6. login to their sandbox from the hub
 

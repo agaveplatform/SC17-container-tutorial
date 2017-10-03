@@ -1,0 +1,55 @@
+1. create agave account
+
+2. create github account if they dont’ have one
+
+3. claim the VM we assigned to them ahead of time
+
+4. login to a hub
+
+6. login to their sandbox from the hub
+
+7. find the funwave app in their sandbox home (edited)
+
+8. build the source
+
+9. build the source image
+
+10. schedule auto-build
+
+11. kick off auto-build and publish
+
+12. Run thei published image on their sandbox
+
+13. verify output showed up (edited)
+
+14. view the output in their notebook
+
+15. generate a quick viz of their output, create some metadata
+
+16. save the notebook to their work directory, gnerate a postit, and share the link
+
+17. Now share their system and app with another user (for i in jetsteam-gw17-training-[0-20]; apps-pems-addupdate…) (edited)
+
+18. rerun the app and sample data across all the hosts shared with them and tehir own
+
+19. see the results show up
+
+20. introduce jupyter ui components to turn the previous step into a simple UI
+
+21. Rerun a job with the UI
+
+22. Update source. commit, and let image rebuilt.
+
+23. rerun job through UI
+
+24. compare results and see changes show up
+
+25. save notebook again
+
+26. Run notebook itself as a batch agave app on another host they haven’t used (just another jetstream VM)
+
+(optional) 27. Run funwaye as container on jetstream cluster, @lsu, @tacc though same notebook to see portability
+
+(optinoal) 28. Show same UI and accesssibility in microsite on github
+
+(optinoal) 29. Show same UI and accesssibility in agave togo on github (edited)

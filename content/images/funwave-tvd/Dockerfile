@@ -9,7 +9,7 @@ USER root
 # add build tools and python to the sandbox
 RUN apt-get update && \
     apt-get install -y --allow-unauthenticated build-essential findutils python3 python3-pip wget make git patch flex gfortran && \
-    apt-get clean 
+    apt-get clean
 
 WORKDIR /home
 RUN  wget https://www.open-mpi.org/software/ompi/v2.1/downloads/openmpi-2.1.1.tar.gz && \
@@ -32,9 +32,14 @@ WORKDIR /home/$TEST_USERNAME/FUNWAVE-TVD/src
 
 RUN perl -p -i -e 's/FLAG_8 = -DCOUPLING/#$&/' Makefile
 RUN make
-RUN chmod 755 /home/$TEST_USERNAME
-
+RUN chown $TEST_USERNAME:$TEST_USERNAME /home/$TEST_USERNAME
+RUN echo "\nexport LD_LIBRARY_PATH=/usr/local/lib\n" >> /home/$TEST_USERNAME/.profile
 USER root
+RUN mv /etc/update-motd.d/00-header /etc/update-motd.d/10-help-text && \
+    sed -i 's/^AcceptEnv.*//' /etc/ssh/sshd_config
+COPY motd /etc/update-motd.d/00-header
+RUN chmod 755 /etc/update-motd.d/00-header
+
 
 #RUN dnf -y install gcc-c++ gcc-gfortran which findutils python3 python3-pip wget make git patch flex && \
 #WORKDIR /home

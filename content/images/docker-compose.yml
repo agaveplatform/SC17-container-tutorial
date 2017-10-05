@@ -12,15 +12,16 @@ services:
     command: start-notebook.sh --NotebookApp.token=''
     mem_limit: 2048m
     ports:
-      - 8888:8888
+      - '8888:8005'
     environment:
       - 'VM_MACHINE=$VM_MACHINE'
       - 'VP_IPADDRESS=$VP_IPADDRESS'
       - 'USE_TUNNEL=True'
     volumes:
       - training-volume:/home/jovyan/work
-      - ./sandbox/ssh:/home/jovyan/.ssh:ro
+      #- ./sandbox/ssh:/home/jovyan/.ssh:ro
       - $HOME/.agave:/home/jovyan/.agave
+      - ../notebooks:/home/jovyan/notebooks:ro
 
   sandbox:
     build:
@@ -30,15 +31,17 @@ services:
         VERSION: 0.2
     image: agaveplatform/sc17-sandbox
     mem_limit: 2048m
+    privileged: True
     ports:
-     - 10222:8888
+      - '10022:22'
     environment:
       - 'VM_MACHINE=$VM_MACHINE'
       - 'VP_IPADDRESS=$VP_IPADDRESS'
       - 'USE_TUNNEL=True'
     volumes:
-     - training-volume:/home/jovyan/work
-     - $HOME/.agave:/home/jovyan/.agave
+      - training-volume:/home/jovyan/work
+      - $HOME/.agave:/home/jovyan/.agave
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   training-volume:

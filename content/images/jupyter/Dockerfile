@@ -59,9 +59,11 @@ LABEL org.agaveplatform.devops.architecture="x86_64"                            
 ENV VM_MACHINE sandbox
 ENV VM_IPADDRESS 204.90.47.30
 ENV USE_TUNNEL false
-RUN mkdir -p /home/jovyan/.ssh
-RUN chmod 700 .ssh
-COPY keys/tutorial .ssh/id_rsa
-COPY keys/tutorial.pub .ssh/id_rsa.pub
+
 USER root
-RUN find /home/jovyan | xargs chown jovyan
+
+COPY ./ssh/ /home/jovyan/.ssh/
+RUN chmod 700 /home/jovyan/.ssh && \
+    cp /home/jovyan/.ssh/id_rsa.pub /home/jovyan/.ssh/authorized_keys && \
+    chmod 600 /home/jovyan/.ssh/authorized_keys && \
+    find /home/jovyan | xargs chown jovyan

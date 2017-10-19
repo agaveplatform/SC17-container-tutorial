@@ -40,6 +40,11 @@ RUN mv /etc/update-motd.d/00-header /etc/update-motd.d/10-help-text && \
 COPY motd /etc/update-motd.d/00-header
 RUN chmod 755 /etc/update-motd.d/00-header
 
+RUN find /home/jovyan | xargs chown jovyan && \
+    apt-get install -y vim-tiny nano && \
+    echo "Cmnd_Alias DOCKER_CMDS = /usr/bin/docker" >> /etc/sudoers && \
+    echo "jovyan ALL=(ALL) NOPASSWD: DOCKER_CMDS" >> /etc/sudoers
+
 
 #RUN dnf -y install gcc-c++ gcc-gfortran which findutils python3 python3-pip wget make git patch flex && \
 #WORKDIR /home

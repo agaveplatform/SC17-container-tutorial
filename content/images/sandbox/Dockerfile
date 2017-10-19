@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TEST_USERNAME jovyan
 
 RUN apt-get update -qqq && \
-    apt-get install -y apt-utils debconf-utils wget curl openssl ssh
+    apt-get install -y apt-utils debconf-utils wget curl openssl ssh sudo vim-tiny nano
 
     # install Docker -- this will put the cli binary in the image. you will still
     # need to bind mount the docker socket into the host for it to work...
@@ -42,8 +42,9 @@ ADD ssh/id_rsa /home/$TEST_USERNAME/.ssh/id_rsa
 
 RUN chmod 700 /home/$TEST_USERNAME/.ssh && \
     chmod 600 /home/$TEST_USERNAME/.ssh/authorized_keys && \
+    chmod 600 /home/$TEST_USERNAME/.ssh/id_rsa && \
     chown -R $TEST_USERNAME /home/$TEST_USERNAME/.ssh && \
-    usermod -a -G docker "$TEST_USERNAME"
+    find /home/jovyan | xargs chown jovyan
 
 RUN apt-get install -y python-pip && \
     pip install supervisor

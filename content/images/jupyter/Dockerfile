@@ -7,11 +7,11 @@ USER root
 RUN cd /usr/local && \
     wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && \
     mv /usr/local/jq-linux64 /usr/local/bin/jq && \
-    chmod +x /usr/local/bin/jq ;\
+    chmod +x /usr/local/bin/jq && \
 
     # add sshpass for importing password without displaying in console
-    apt-get update ;\
-    apt-get -y install sshpass ;\
+    apt-get update && \
+    apt-get -y install sshpass && \
     apt-get clean
 
 USER jovyan
@@ -66,4 +66,7 @@ COPY ./ssh/ /home/jovyan/.ssh/
 RUN chmod 700 /home/jovyan/.ssh && \
     cp /home/jovyan/.ssh/id_rsa.pub /home/jovyan/.ssh/authorized_keys && \
     chmod 600 /home/jovyan/.ssh/authorized_keys && \
-    find /home/jovyan | xargs chown jovyan
+    chmod 600 /home/jovyan/.ssh/id_rsa 
+
+EXPOSE 8005 8888
+CMD ["start-notebook.sh", "--NotebookApp.token=''"]

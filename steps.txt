@@ -50,7 +50,7 @@
 
 26. Run notebook itself as a batch agave app on another host they haven’t used (just another jetstream VM)
 
-(optional) 27. Run funwaye as container on jetstream cluster, @lsu, @tacc though same notebook to see portability
+(optional) 27. Run funwave as container on jetstream cluster, @lsu, @tacc though same notebook to see portability
 
 (optinoal) 28. Show same UI and accesssibility in microsite on github
 

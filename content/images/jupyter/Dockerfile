@@ -11,7 +11,7 @@ RUN cd /usr/local && \
 
     # add sshpass for importing password without displaying in console
     apt-get update && \
-    apt-get -y install sshpass && \
+    apt-get -y install sshpass bsdmainutils && \
     apt-get clean
 
 USER jovyan
@@ -35,6 +35,7 @@ ENV AGAVE_CLI_COMPLETION_CACHE_LIFETIME 0
 RUN tenants-init -t agave.prod -v
 
 ADD examples examples
+ADD INSTALL.ipynb INSTALL.ipynb
 COPY start.sh /usr/local/bin
 USER jovyan
 RUN mkdir .jupyter
@@ -66,7 +67,8 @@ COPY ./ssh/ /home/jovyan/.ssh/
 RUN chmod 700 /home/jovyan/.ssh && \
     cp /home/jovyan/.ssh/id_rsa.pub /home/jovyan/.ssh/authorized_keys && \
     chmod 600 /home/jovyan/.ssh/authorized_keys && \
-    chmod 600 /home/jovyan/.ssh/id_rsa 
+    chmod 600 /home/jovyan/.ssh/id_rsa && \
+    chown -R jovyan:users /home/jovyan/.ssh
 
 EXPOSE 8005 8888
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]

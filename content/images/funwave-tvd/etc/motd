@@ -25,3 +25,23 @@ echo '
 *                                                                             *
 ===============================================================================
 '
+
+TUNNEL_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
+
+if [[ -n "$TUNNEL_URL" ]]; then
+  export VM_HOSTNAME=$(echo "$TUNNEL_URL" |  sed 's|^tcp://||' | sed -r 's#(.*):(.*)#\1#' )
+  export VM_IPADDRESS=$(echo "$TUNNEL_URL" |  sed 's|^tcp://||' | sed -r 's#(.*):(.*)#\1#' )
+  export VM_SSH_PORT=$(echo "$TUNNEL_URL" |  sed 's|^tcp://||' | sed -r 's#(.*):(.*)#\2#' )
+
+  echo "*                                                                             *"
+  echo "* A tunnel has been created for this container to the outside                 *"
+  echo "* world at:                                                                   *"
+  echo "*                                                                             *"
+  echo "*   $VM_HOSTNAME:$VM_SSH_PORT                                                 *"
+  echo "*                                                                             *"
+  echo "* You may ssh into this container using the tunnel address:                   *"
+  echo "*                                                                             *"
+  echo "*   ssh -p $VM_SSH_PORT jovyan@$VM_HOSTNAME                                   *"
+  echo "*                                                                             *"
+  echo "==============================================================================="
+fi

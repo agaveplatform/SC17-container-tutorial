@@ -37,35 +37,39 @@ RUN echo "\nexport LD_LIBRARY_PATH=/usr/local/lib\n" >> /home/$TEST_USERNAME/.pr
 USER root
 RUN mv /etc/update-motd.d/00-header /etc/update-motd.d/10-help-text && \
     sed -i 's/^AcceptEnv.*//' /etc/ssh/sshd_config
-COPY motd /etc/update-motd.d/00-header
+COPY etc/motd /etc/update-motd.d/00-header
 RUN chmod 755 /etc/update-motd.d/00-header
 
-RUN find /home/jovyan | xargs chown jovyan && \
+RUN find /home/$TEST_USERNAME | xargs chown $TEST_USERNAME && \
     apt-get install -y vim-tiny nano && \
-    echo "Cmnd_Alias DOCKER_CMDS = /usr/bin/docker" >> /etc/sudoers && \
-    echo "jovyan ALL=(ALL) NOPASSWD: DOCKER_CMDS" >> /etc/sudoers
+    echo "includedir /etc/sudoers.d" >> /etc/sudoers && \
+    echo "$TEST_USERNAME ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/$TEST_USERNAME && \
+    chmod 440 /etc/sudoers.d/$TEST_USERNAME
 
+RUN apt-get install -y unzip jq && \
+    curl -sk -o /usr/local/ngrok.zip 'https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip' && \
+    unzip /usr/local/ngrok.zip -d /usr/bin && \
+    rm -f /usr/local/ngrok.zip && \
+    mkdir /home/$TEST_USERNAME/.ngrok2 && \
+    echo "web_addr: 0.0.0.0:4040" >> /home/$TEST_USERNAME/.ngrok2/ngrok.yml && \
+    chmod -R 755 /home/$TEST_USERNAME/.ngrok2
 
-#RUN dnf -y install gcc-c++ gcc-gfortran which findutils python3 python3-pip wget make git patch flex && \
-#WORKDIR /home
-#RUN wget https://www.open-mpi.org/software/ompi/v2.1/downloads/openmpi-2.1.1.tar.gz
-#RUN tar xzvf openmpi-2.1.1.tar.gz
-#WORKDIR /home/openmpi-2.1.1
-#RUN ./configure
-#RUN make -j 5 install
-#
-#RUN adduser funw
-#USER funw
-#
-##ENV LD_LIBRARY_PATH="/usr/lib64/openmpi/lib"
-##ENV MPI_FORTRAN_MOD_DIR="/usr/lib64/gfortran/modules/openmpi";
-##ENV PATH="/usr/lib64/openmpi/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/funw/.local/bin:/home/funw/bin";
-##ENV PKG_CONFIG_PATH="/usr/lib64/openmpi/lib/pkgconfig";
-#WORKDIR /home/funw
-#
-#RUN git clone https://github.com/fengyanshi/FUNWAVE-TVD
-#
-#WORKDIR /home/funw/FUNWAVE-TVD/src
-#RUN perl -p -i -e 's/FLAG_8 = -DCOUPLING/#$&/' Makefile
-#RUN make
-#RUN chmod 755 /home/funw
+RUN echo alias ngrok_url=\""curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url' \"" >> /home/$TEST_USERNAME/.bashrc && \
+    echo alias ngrok_port=\""curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url' |  sed 's|^tcp://||' | sed -r 's#(.*):(.*)#\2#' " \" >> /home/$TEST_USERNAME/.bashrc && \
+    echo alias ngrok_host=\""curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url' |  sed 's|^tcp://||' | sed -r 's#(.*):(.*)#\1#' " \" >> /home/$TEST_USERNAME/.bashrc && \
+    chown -R $TEST_USERNAME /home/$TEST_USERNAME/.ngrok2
+
+# copies ngrok startup scripts to default path
+COPY bin/ /usr/local/bin/
+COPY etc/supervisord.conf /etc/supervisord.conf
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+
+# RUN mkdir -p /var/log/supervisor && \
+#     touch /var/log/supervisor/ngrok.log && \
+#     touch /var/log/supervisor/sshd.log
+
+EXPOSE 22 4040
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+
+CMD ["/usr/local/bin/supervisord"]

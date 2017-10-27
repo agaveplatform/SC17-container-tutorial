@@ -1,48 +1,93 @@
 version: '2'
 
-services:
+volumes:
+  training-volume:
 
+services:
   jupyter:
-    build:
-      context: ./jupyter
-      dockerfile: Dockerfile
-      args:
-        VERSION: 0.2
-    image: agaveplatform/jupyter-notebook
+    image: agaveplatform/jupyter-notebook:latest
     command: start-notebook.sh --NotebookApp.token=''
     mem_limit: 2048m
     ports:
       - '8888:8005'
     environment:
-      - 'VM_MACHINE=$VM_MACHINE'
-      - 'VP_IPADDRESS=$VP_IPADDRESS'
-      - 'USE_TUNNEL=True'
+      - VM_MACHINE=training-node-dooley
+      - VM_IPADDRESS=sandbox
+      - VM_HOSTNAME=training-node-dooley
+      - $HOME/.agave:/home/jovyan/.agave
+      - USE_TUNNEL=False
+      - ENVIRONMENT=training
+      - AGAVE_USERNAME=dooley
+      - AGAVE_CACHE_DIR=/home/jovyan/work/.agave
+      - AGAVE_JSON_PARSER=jq
     volumes:
       - training-volume:/home/jovyan/work
-      #- ./sandbox/ssh:/home/jovyan/.ssh:ro
-      - $HOME/.agave:/home/jovyan/.agave
-      - ../notebooks:/home/jovyan/notebooks:ro
-
   sandbox:
-    build:
-      context: ./sandbox
-      dockerfile: Dockerfile
-      args:
-        VERSION: 0.2
-    image: agaveplatform/sc17-sandbox
+    image: agaveplatform/sc17-sandbox:latest
     mem_limit: 2048m
     privileged: True
     ports:
       - '10022:22'
     environment:
-      - 'VM_MACHINE=$VM_MACHINE'
-      - 'VP_IPADDRESS=$VP_IPADDRESS'
-      - 'USE_TUNNEL=True'
+      - VM_MACHINE=training-node-dooley
+      - NGROK_TOKEN=5kajo8aJAtanR1r9ybCwY_5RtSPtHkBqD3JMyRtZYMs
+      - USE_TUNNEL=True
+      - ENVIRONMENT=training
+      - AGAVE_CACHE_DIR=/home/jovyan/work/.agave
     volumes:
       - training-volume:/home/jovyan/work
-      - $HOME/.agave:/home/jovyan/.agave
       - /var/run/docker.sock:/var/run/docker.sock
       - $HOME/.docker:/home/jovyan/.docker:ro
 
-volumes:
-  training-volume:
+
+
+
+# version: '2'
+#
+# services:
+#
+#   jupyter:
+#     build:
+#       context: ./jupyter
+#       dockerfile: Dockerfile
+#       args:
+#         VERSION: 0.2
+#     image: agaveplatform/jupyter-notebook
+#     command: start-notebook.sh --NotebookApp.token=''
+#     mem_limit: 2048m
+#     ports:
+#       - '8888:8005'
+#     environment:
+#       - 'VM_MACHINE=$VM_MACHINE'
+#       - 'VP_IPADDRESS=$VP_IPADDRESS'
+#       - 'USE_TUNNEL=True'
+#     volumes:
+#       - training-volume:/home/jovyan/work
+#       #- ./sandbox/ssh:/home/jovyan/.ssh:ro
+#       - $HOME/.agave:/home/jovyan/.agave
+#       - ../notebooks:/home/jovyan/notebooks:ro
+#
+#   sandbox:
+#     build:
+#       context: ./sandbox
+#       dockerfile: Dockerfile
+#       args:
+#         VERSION: 0.2
+#     image: agaveplatform/sc17-sandbox
+#     mem_limit: 2048m
+#     privileged: True
+#     ports:
+#       - '10022:22'
+#     environment:
+#       - 'VM_MACHINE=$VM_MACHINE'
+#       - 'VP_IPADDRESS=$VP_IPADDRESS'
+#       - 'USE_TUNNEL=True'
+#       - 'NGROK_TUNNEL=5kajo8aJAtanR1r9ybCwY_5RtSPtHkBqD3JMyRtZYMs'
+#     volumes:
+#       - training-volume:/home/jovyan/work
+#       - $HOME/.agave:/home/jovyan/.agave
+#       - /var/run/docker.sock:/var/run/docker.sock
+#       - $HOME/.docker:/home/jovyan/.docker:ro
+#
+# volumes:
+#   training-volume:

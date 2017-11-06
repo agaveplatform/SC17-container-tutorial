@@ -46,5 +46,5 @@ Your home directory on the Jupyter server is shared with your sandbox, so you ca
 To login to the sandbox from outside the Jupyter server, use the fully qualified domain name. You can obtain valid ssh keys from the `~/.ssh` director of your Jupyter server.
 
 ```
-ssh -i /path/to/private/key.pem tutorial@<username>-sandbox.tutorial.public.agaveplatform.org
+ssh -i /path/to/private/key.pem -p 10022 jovyan@$VM_IPADDRESS
 ```

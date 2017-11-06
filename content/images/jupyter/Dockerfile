@@ -48,7 +48,7 @@ ARG VERSION
 LABEL org.agaveplatform.devops.architecture="x86_64"                                \
       org.agaveplatform.devops.build-date="$BUILD_DATE"                             \
       org.agaveplatform.devops.license="BSD 3-clause"                               \
-      org.agaveplatform.devops.name="agaveplatform/jupyter-datascience-notebook"    \
+      org.agaveplatform.devops.name="agaveplatform/jupyter-notebook"    \
       org.agaveplatform.devops.summary="Jupyter datascience notebook server with Agave Python 2 SDK and CLI " \
       org.agaveplatform.devops.version="$VERSION"                                   \
       org.agaveplatform.devops.vcs-type="git"                                       \
@@ -68,7 +68,8 @@ RUN chmod 700 /home/jovyan/.ssh && \
     cp /home/jovyan/.ssh/id_rsa.pub /home/jovyan/.ssh/authorized_keys && \
     chmod 600 /home/jovyan/.ssh/authorized_keys && \
     chmod 600 /home/jovyan/.ssh/id_rsa && \
-    chown -R jovyan:users /home/jovyan/.ssh
+    chown -R jovyan:users /home/jovyan/.ssh && \
+    chonw -R jovyan:users /home/jovyan/INSTALL.ipynb
 
 EXPOSE 8005 8888
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]

@@ -1,0 +1,40 @@
+version: '2'
+
+volumes:
+  sydney-2017-training-volume:
+
+services:
+  jupyter:
+    image: agaveplatform/jupyter-notebook:latest
+    command: start-notebook.sh --NotebookApp.token=''
+    mem_limit: 2048m
+    ports:
+      - '8888:8005'
+    environment:
+      - VM_MACHINE=training-node-${AGAVE_USERNAME}
+      - VM_HOSTNAME=training-node-${AGAVE_USERNAME}
+      - $HOME/.agave:/home/jovyan/.agave
+      - USE_TUNNEL=False
+      - ENVIRONMENT=training
+      - AGAVE_USERNAME=dooley
+      - AGAVE_CACHE_DIR=/home/jovyan/work/.agave
+      - AGAVE_JSON_PARSER=jq
+    volumes:
+      - sydney-2017-training-volume:/home/jovyan/work
+      - .:/home/jovyan/notebooks
+  sandbox:
+    image: agaveplatform/sc17-sandbox:latest
+    mem_limit: 2048m
+    privileged: True
+    ports:
+      - '10022:22'
+    environment:
+      - VM_MACHINE=training-node-${AGAVE_USERNAME}
+      - NGROK_TOKEN=${NGROK_TOKEN}
+      - USE_TUNNEL=True
+      - ENVIRONMENT=training
+      - AGAVE_CACHE_DIR=/home/jovyan/work/.agave
+    volumes:
+      - sydney-2017-training-volume:/home/jovyan/work
+      - /var/run/docker.sock:/var/run/docker.sock
+      - $HOME/.docker:/home/jovyan/.docker:ro

@@ -4,6 +4,9 @@ Supercomputing matters. So does user experience. Standing between the mainstream
 
 In this tutorial, we combine best practices and lessons learned while on-boarding the last 70k new users to TACC’s data center through the Agave Platform. Participants will walk through the process of scaling their application from a local environment to the Jetstream academic cloud and to a high performance computing system at the Texas Advanced Computing Center. They will learn to use multiple container technologies to harmonize app execution between cloud and HPC resources, and they will learn to use modern APIs to orchestrate job execution, capture provenance information, and foster collaboration.
 
+# Preview  
+
+[![Intro Video](http://img.youtube.com/vi/hVnIrjn_aBI/maxresdefault.jpg)](http://www.youtube.com/watch?v=hVnIrjn_aBI "HPC via HTTP: Portable, Scalable Computing using App Containers and the Agave API")  
 
 # Schedule
 

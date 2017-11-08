@@ -26,7 +26,7 @@ RUN pip2 install ipywidgets && \
     jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
 # Install agave bash cli
-RUN  git clone https://github.com/agaveplatform/agave-cli.git src/cli
+RUN  git clone -b develop --depth  1  https://github.com/agaveplatform/agave-cli.git src/cli
 ENV PATH $PATH:/usr/local/jq/bin:$HOME/src/cli/bin
 ENV AGAVE_JSON_PARSER jq
 ENV AGAVE_CLI_COMPLETION_SHOW_FILES no
@@ -59,7 +59,7 @@ LABEL org.agaveplatform.devops.architecture="x86_64"                            
 
 ENV VM_MACHINE sandbox
 ENV VM_IPADDRESS 204.90.47.30
-ENV USE_TUNNEL false
+ENV USE_TUNNEL False
 
 USER root
 
@@ -68,8 +68,12 @@ RUN chmod 700 /home/jovyan/.ssh && \
     cp /home/jovyan/.ssh/id_rsa.pub /home/jovyan/.ssh/authorized_keys && \
     chmod 600 /home/jovyan/.ssh/authorized_keys && \
     chmod 600 /home/jovyan/.ssh/id_rsa && \
+    echo "Host *" > /home/jovyan/.ssh/config && \
+    echo "UserKnownHostsFile      /dev/null" >> /home/jovyan/.ssh/config && \
+    echo "StrictHostKeyChecking   false" >> /home/jovyan/.ssh/config && \
     chown -R jovyan:users /home/jovyan/.ssh && \
-    chonw -R jovyan:users /home/jovyan/INSTALL.ipynb
+    chown -R jovyan:users /home/jovyan/INSTALL.ipynb
+
 
 EXPOSE 8005 8888
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]

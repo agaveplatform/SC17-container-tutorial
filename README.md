@@ -10,17 +10,63 @@ In this tutorial, we combine best practices and lessons learned while on-boardin
 
 # Schedule
 
-|Time           | Topic                                                       |
-|---------------|-------------------------------------------------------------|
-|  8:30 - 9:00 | [Overview and introductions](overview/readme.md): Introduce instructors and learners. Lay out learning objectives for the morning session. Present an overview of containers and Science-as-a-Service APIs (Presentation and Discussion; 30 minutes)|
-|  9:00 - 9:20 | [Resources, Jupyter, Login](setup/readme.md) (hands-on)|
-|  9:20 - 10:00 | [Code, Build, and Test](portability_performance_and_persistence/readme.md) |
-|  9:20 - 9:40 | Checkout, build, run locally: Participants will learn to build and test containers on their local computer. (Hands-on 40 minutes) |
-|  9:40 - 10:00 | Set up auto-build, commit/save code change, run local and remote via agave cli/skd |
-|  10:00 - 10:30 | Break  |
-|  10:30 - 10:45 | [Viewing simulation results, sharing, provenance](sharing/readme.md)  |
-|  10:45 - 11:30 | [Packaging and publishing experimental runs, results and codes](publishing/readme.md)|
-|  11:30 - 12:00 | [Scaling, benchmarking, future directions, homework](performance/readme.md) |
+<table class="tg" style="width: 100%">
+  <tr>
+    <th class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Time</th>
+    <th class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Presenterr</th>
+    <th class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Topic</th>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">08:30 - 08:45</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">John, Steve</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">[Introductions](01%20Introduction.ipynb)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">08:45 - 09:05</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Rion</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">[Agave Overview](02%20Agave%20Overview.pdf)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">09:05 - 09:15</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Kathy</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">[Jupyter, Sanbox, and Logging In](03%20Jupyter%2C%20Sandboxes%2C%20and%20Logging%20In.ipynb)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">09:15 - 09:30</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Steve</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">[Code, Build, and Test](04%20Code%20Build%20and%20Test.ipynb)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">09:30 - 10:00</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Rion, John</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">[Hands on with Agave](05%20Hands%20on%20with%20Agave.ipynb)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">10:00 - 10:30</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">--</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Break</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">10:30 - 11:00</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Steve,John</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">[Docker and Singularity](06%20Docker%20and%Singularity.ipynb)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">11:00 - 11:15</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Rion</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">[Automation an Benchmarking](07%20Automation%20and%20Benchmarking.ipynb)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">11:15 - 11:45</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Kathy, Rion</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">[Packaging, publishing, and Portability](08%20Packaging%20publishing%20and%20Portability.ipynb)</td>
+  </tr>
+  <tr>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">11:45 - 12:00</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">Steve, John</td>
+    <td class="tg-yw4l" style="min-width: 150px; font-size: 1.5em; text-align:left; ">[Future Directions and Homework)[09%20Future%20Directions%20and%20Homework.ipynb]</td>
+  </tr>
+</table>
 
 # Table of Contents
 

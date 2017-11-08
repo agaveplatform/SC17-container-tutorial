@@ -223,48 +223,52 @@ c.NotebookApp.ip = '0.0.0.0'
 #  any user can connect to the notebook server via ssh.
 
 
-# c.NotebookApp.password_required = True
+c.NotebookApp.password_required = True
 #
 # Look for password in environment. This is the user's plaintext password. Not for prod use
-# if os.environ.get('AGAVE_PASSWORD'):
-#
-#     # hash the plaintext password here
-#     from notebook.auth import passwd
-#     agavePassHash = passwd(os.environ.get('AGAVE_PASSWORD'))
-#
-# elif os.environ.get('AGAVE_PASSWORD_HASH'):
-#
-#     agavePassHash = os.environ.get('AGAVE_PASSWORD_HASH');
-#
-# # No password in the env, so look for an agave username to look up the docker secret
-# elif os.environ.get('AGAVE_USERNAME'):
-#
-#     # secret will be filed under the training/<username>/hash path
-#     secretFilePath = print "/run/secrets/training/{}/hash" os.environ.get('AGAVE_USERNAME');
-#
-#     # if it exists, read the contents and use that
-#     if os.path.isfile(secretFilePath):
-#
-#         f = open(secretFilePath,'r',encoding = 'utf-8')
-#         agavePassHash = f.read()
-#
-#         # If the value is not empty use that
-#         if agavePassHash:
-#             c.NotebookApp.password = agavePassHash
-#
-#         # otherwise do not require password
-#         else:
-#             c.NotebookApp.password_required = False
-#
-#     # no secret file and no password or hash in environment.
-#     # we won't require password as we have none to use
-#     else
-#         c.NotebookApp.password_required = False
-#
-# # no username and no password or hash in environment.
-# # we won't require password as we have none to use
-# else
-    c.NotebookApp.password_required = False
+import os
+if os.environ.get('AGAVE_PASSWORD'):
+    #
+    # hash the plaintext password here
+    from notebook.auth import passwd
+    agavePassHash = passwd(os.environ.get('AGAVE_PASSWORD'))
+    c.NotebookApp.password = agavePassHash
+
+elif os.environ.get('AGAVE_PASSWORD_HASH'):
+
+    agavePassHash = os.environ.get('AGAVE_PASSWORD_HASH');
+    c.NotebookApp.password = agavePassHash
+
+    #
+    # # No password in the env, so look for an agave username to look up the docker secret
+    # elif os.environ.get('AGAVE_USERNAME'):
+    #
+    #     # secret will be filed under the training/<username>/hash path
+    #     secretFilePath = print "/run/secrets/training/{}/hash" os.environ.get('AGAVE_USERNAME');
+    #
+    #     # if it exists, read the contents and use that
+    #     if os.path.isfile(secretFilePath):
+    #
+    #         f = open(secretFilePath,'r',encoding = 'utf-8')
+    #         agavePassHash = f.read()
+    #
+    #         # If the value is not empty use that
+    #         if agavePassHash:
+    #             c.NotebookApp.password = agavePassHash
+    #
+    #         # otherwise do not require password
+    #         else:
+    #             c.NotebookApp.password_required = False
+    #
+    #     # no secret file and no password or hash in environment.
+    #     # we won't require password as we have none to use
+    #     else
+    #         c.NotebookApp.password_required = False
+    #
+    # # no username and no password or hash in environment.
+    # # we won't require password as we have none to use
+else:
+  c.NotebookApp.password_required = False
 
 
 ## The port the notebook server will listen on.

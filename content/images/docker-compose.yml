@@ -11,15 +11,26 @@ services:
     ports:
       - '8888:8005'
     environment:
-      - VM_MACHINE=training-node-dooley
-      - VM_IPADDRESS=sandbox
-      - VM_HOSTNAME=training-node-dooley
-      - $HOME/.agave:/home/jovyan/.agave
-      - USE_TUNNEL=False
+      - VM_MACHINE=training-node-${AGAVE_USERNAME}
+      - USE_TUNNEL=True
       - ENVIRONMENT=training
-      - AGAVE_USERNAME=dooley
+      - SCRATCH_DIR=/home/jovyan
+      - MACHINE_USERNAME=jovyan
+      - MACHINE_NAME=sandbox
+      - DOCKERHUB_NAME=stevenrbrandt
+      - AGAVE_APP_DEPLOYMENT_PATH=agave-deployment
       - AGAVE_CACHE_DIR=/home/jovyan/work/.agave
       - AGAVE_JSON_PARSER=jq
+      - AGAVE_USERNAME=${AGAVE_USERNAME}
+      - AGAVE_PASSWORD=${AGAVE_PASSWORD}
+      - AGAVE_TENANT=sandbox
+      - AGAVE_TENANTS_API_BASEURL=https://agave-auth.solveij.com/tenants
+      - AGAVE_SYSTEM_SITE_DOMAIN=localhost
+      - AGAVE_STORAGE_WORK_DIR=/home/jovyan
+      - AGAVE_STORAGE_HOME_DIR=/home/jovyan
+      - AGAVE_APP_NAME=funwave-tvd-sc17-${AGAVE_USERNAME}
+      - AGAVE_STORAGE_SYSTEM_ID=nectar-storage-${AGAVE_USERNAME}
+      - AGAVE_EXECUTION_SYSTEM_ID=nectar-exec${AGAVE_USERNAME}
     volumes:
       - training-volume:/home/jovyan/work
       - ../notebooks:/home/jovyan/notebooks
@@ -31,7 +42,7 @@ services:
       - '10022:22'
     environment:
       - VM_MACHINE=training-node-dooley
-      - NGROK_TOKEN=5kajo8aJAtanR1r9ybCwY_5RtSPtHkBqD3JMyRtZYMs
+      - NGROK_TOKEN=${NGROK_TOKEN}
       - USE_TUNNEL=True
       - ENVIRONMENT=training
       - AGAVE_CACHE_DIR=/home/jovyan/work/.agave

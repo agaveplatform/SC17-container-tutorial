@@ -35,7 +35,7 @@ ENV AGAVE_CLI_COMPLETION_CACHE_LIFETIME 0
 RUN tenants-init -t agave.prod -v
 
 ADD examples examples
-ADD INSTALL.ipynb INSTALL.ipynb
+ADD ../../notebooks/INSTALL.ipynb INSTALL.ipynb
 COPY start.sh /usr/local/bin
 USER jovyan
 RUN mkdir .jupyter

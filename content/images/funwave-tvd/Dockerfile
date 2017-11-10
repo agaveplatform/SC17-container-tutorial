@@ -42,7 +42,6 @@ RUN chmod 755 /etc/update-motd.d/00-header
 
 RUN find /home/$TEST_USERNAME | xargs chown $TEST_USERNAME && \
     apt-get install -y vim-tiny nano && \
-    echo "includedir /etc/sudoers.d" >> /etc/sudoers && \
     echo "$TEST_USERNAME ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/$TEST_USERNAME && \
     chmod 440 /etc/sudoers.d/$TEST_USERNAME
 
@@ -54,19 +53,14 @@ RUN apt-get install -y unzip jq && \
     echo "web_addr: 0.0.0.0:4040" >> /home/$TEST_USERNAME/.ngrok2/ngrok.yml && \
     chmod -R 755 /home/$TEST_USERNAME/.ngrok2
 
-RUN echo alias ngrok_url=\""curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url' \"" >> /home/$TEST_USERNAME/.bashrc && \
-    echo alias ngrok_port=\""curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url' |  sed 's|^tcp://||' | sed -r 's#(.*):(.*)#\2#' " \" >> /home/$TEST_USERNAME/.bashrc && \
-    echo alias ngrok_host=\""curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url' |  sed 's|^tcp://||' | sed -r 's#(.*):(.*)#\1#' " \" >> /home/$TEST_USERNAME/.bashrc && \
-    chown -R $TEST_USERNAME /home/$TEST_USERNAME/.ngrok2
-
 # copies ngrok startup scripts to default path
 COPY bin/ /usr/local/bin/
 COPY etc/supervisord.conf /etc/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY bashrc /home/$TEST_USERNAME/.bashrc
 
-# RUN mkdir -p /var/log/supervisor && \
-#     touch /var/log/supervisor/ngrok.log && \
-#     touch /var/log/supervisor/sshd.log
+RUN chown $TEST_USERNAME:$TEST_USERNAME /home/$TEST_USERNAME/.bashrc && \
+    chown -R $TEST_USERNAME /home/$TEST_USERNAME/.ngrok2
 
 EXPOSE 22 4040
 

@@ -23,7 +23,6 @@ Inside of the `examples` directory, you will find several notebooks to help you 
 
 ## Sandbox environment
 The sandbox has the following pre-installed:
-* [TODO] @stevenrbrandt please review
 * build-essential
 * gfortran
 
@@ -32,8 +31,6 @@ The sample code for this project is already present in `~/funwave-tvd`.
 
 ## Container runtimes
 Docker and Singularity are both preinstalled in the Sandbox. Private registries for both container runtimes are hosted on `build.tutorial.public.agaveplatform.org`. You may authenticate with your Agave credentials.  
-
-<span style='color:red'>Is this a browser or ssh login? What does the student do after logging in? Look at the source files? Trigger a build?</span>
 
 ## Agave CLI
 The Agave CLI is available in your sandbox `~/src/agave-cli` directory. The commands are already present in your environment `$PATH`.

@@ -40,7 +40,7 @@ services:
     ports:
       - '10022:22'
     environment:
-      - VM_MACHINE=training-node-dooley
+      - VM_MACHINE=training-node-${AGAVE_USERNAME}
       - NGROK_TOKEN=${NGROK_TOKEN}
       - USE_TUNNEL=True
       - ENVIRONMENT=training

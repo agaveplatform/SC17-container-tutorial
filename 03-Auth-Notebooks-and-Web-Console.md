@@ -3,7 +3,6 @@
 ## Custom Kernels
 Your Jupyter server has multiple kernels available for use right away. We have preconfigured them with several useful libraries and tools to help users get up and running with common tasks easier. Additionally, we have bundled in Agave CLI and Python SDK into the Bash and Python2 kernels respectively. Both kernels are pre-authenticated with valid Agave auth tokens that you can use to begin interacting with the Agave Platform right away.
 
-<span style='color:red'>Not Python3?</a>
 
 ## Shared file system
 Your home directory on the Jupyter server is shared with your sandbox, so you can safely copy data between the two environments quickly and easily.

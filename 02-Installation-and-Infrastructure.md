@@ -16,7 +16,7 @@ Each user has their own "Training system," which will be created shortly after y
 The Jupyter server is available from their browser at:  
 
 ```  
-https://<agave-username>-jupyter.training.public.agaveplatform.org.  
+https://<training###>-sc17.training.agaveaplatform.org  .   Where training### becomes an account from training001 to training 100.  
 ```  
 
 *Note: Please avoid using the Safari browser.*

@@ -26,4 +26,6 @@ You will need an account on the Agave Platform to login to your tutorial noteboo
 ## Tutorial VM
 We have already created a VM for each of you to use in this workshop on Jetstream. Your VM will serve as a development, compute, and storage system as we work through the material. Once you have confirmed your Agave and Github accounts, please login to your notebook server at
 
-> [https://&lt;agave-username&gt;-sc17.training.agaveaplatform.org](https://<username>-sc17.training.agaveaplatform.org)  
+> [https://&lt;training###&gt;-sc17.training.agaveaplatform.org](https://<training###>-sc17.training.agaveaplatform.org)  
+
+where training### is the training account number we assign you so training001 ... training 100

@@ -38,9 +38,10 @@ ADD examples examples
 ADD INSTALL.ipynb INSTALL.ipynb
 ADD http://cct.lsu.edu/~sbrandt/AgaveOverview.pdf AgaveOverview.pdf
 RUN mv AgaveOverview.pdf "Agave Overview.pdf"
+USER root
 RUN chmod 644 "Agave Overview.pdf"
-COPY start.sh /usr/local/bin
 USER jovyan
+COPY start.sh /usr/local/bin
 RUN mkdir .jupyter
 COPY jupyter_notebook_config.py .jupyter/
 RUN chmod 700 .jupyter

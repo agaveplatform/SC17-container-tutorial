@@ -62,6 +62,7 @@ LABEL org.agaveplatform.devops.architecture="x86_64"                            
 ENV VM_MACHINE sandbox
 ENV VM_IPADDRESS 204.90.47.30
 ENV USE_TUNNEL False
+ENV VM_PORT 10022
 
 USER root
 

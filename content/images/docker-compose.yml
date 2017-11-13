@@ -12,6 +12,7 @@ services:
       - '8888:8005'
     environment:
       - VM_MACHINE=training-node-${AGAVE_USERNAME}
+      - VM_HOSTNAME=localhost:8888
       - USE_TUNNEL=True
       - ENVIRONMENT=training
       - SCRATCH_DIR=/home/jovyan
@@ -23,8 +24,6 @@ services:
       - AGAVE_JSON_PARSER=jq
       - AGAVE_USERNAME=${AGAVE_USERNAME}
       - AGAVE_PASSWORD=${AGAVE_PASSWORD}
-      - AGAVE_TENANT=sandbox
-      - AGAVE_TENANTS_API_BASEURL=https://agave-auth.solveij.com/tenants
       - AGAVE_SYSTEM_SITE_DOMAIN=localhost
       - AGAVE_STORAGE_WORK_DIR=/home/jovyan
       - AGAVE_STORAGE_HOME_DIR=/home/jovyan

@@ -36,7 +36,8 @@ RUN tenants-init -t agave.prod -v
 
 ADD examples examples
 ADD INSTALL.ipynb INSTALL.ipynb
-ADD http://cct.lsu.edu/~sbrandt/AgaveOverview.pdf "Agave Overview.pdf"
+ADD http://cct.lsu.edu/~sbrandt/AgaveOverview.pdf AgaveOverview.pdf
+RUN mv AgaveOverview.pdf "Agave Overview.pdf"
 COPY start.sh /usr/local/bin
 USER jovyan
 RUN mkdir .jupyter

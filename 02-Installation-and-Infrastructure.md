@@ -25,11 +25,11 @@ The sandbox is accessible via *ssh* and *sftp*. Users may login to their sandbox
 
 ```
 # Publicly available. Authenticate with the user's Agave Platform password
-ssh training@<agave-username>-sandbox.training.public.agaveplatform.org
+ssh training@<training###>-sandbox.training.public.agaveplatform.org
 
 # Publicly available. Each user's private key is in the home directory of their
 # Jupyter server.
-ssh -i /path/to/private/key.pem training@<agave-username>-sandbox.training.public.agaveplatform.org
+ssh -i /path/to/private/key.pem training@<training###>-sandbox.training.public.agaveplatform.org
 
 # From the jupyter web terminal. Passwordless ssh has already been configured
 # and is available out of the box.

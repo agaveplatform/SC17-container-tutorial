@@ -9,7 +9,7 @@ services:
     command: start-notebook.sh --NotebookApp.token=''
     mem_limit: 2048m
     ports:
-      - '8888:8005'
+      - '8888:8888'
     environment:
       - VM_MACHINE=training-node-${AGAVE_USERNAME}
       - VM_HOSTNAME=localhost:8888
@@ -30,6 +30,7 @@ services:
       - AGAVE_APP_NAME=funwave-tvd-sc17-${AGAVE_USERNAME}
       - AGAVE_STORAGE_SYSTEM_ID=nectar-storage-${AGAVE_USERNAME}
       - AGAVE_EXECUTION_SYSTEM_ID=nectar-exec${AGAVE_USERNAME}
+      - GRANT_SUDO=yes
     volumes:
       - training-volume:/home/jovyan/work
       - ../notebooks:/home/jovyan/notebooks

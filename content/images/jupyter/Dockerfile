@@ -8,23 +8,45 @@ RUN cd /usr/local && \
     wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && \
     mv /usr/local/jq-linux64 /usr/local/bin/jq && \
     chmod +x /usr/local/bin/jq && \
-
     # add sshpass for importing password without displaying in console
     apt-get update && \
     apt-get -y install sshpass bsdmainutils && \
     apt-get clean
 
 USER jovyan
+# install agavepy and bash kernel in python 2 and 3 environments
+RUN pip install agavepy
+
 RUN /bin/bash -c "source activate python2" && \
     pip2 install -e "git+https://github.com/TACC/agavepy.git#egg=agavepy" && \
-
     pip2 install bash_kernel && \
     /bin/bash -c "source activate python2 && python -m bash_kernel.install"
 
 # install jypter widgets for html form generation
-RUN pip2 install ipywidgets && \
+RUN pip install ipywidgets && \
     jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
+USER root
+# install rAgave SDK
+RUN apt-get install -y libssh2-1-dev zlib1g-dev
+RUN echo '\n\
+    \noptions(repos = c(CRAN = "https://cran.rstudio.com/"), download.file.method = "libcurl") \
+    \noptions(repos = c(CRAN="https://mran.microsoft.com/snapshot/2017-12-31"), download.file.method = "libcurl") \
+    \n\
+    \n# Configure httr to perform out-of-band authentication if HTTR_LOCALHOST \
+    \n# is not set since a redirect to localhost may not work depending upon \
+    \n# where this Docker container is running. \
+    \nif(is.na(Sys.getenv("HTTR_LOCALHOST", unset=NA))) { \
+    \n  options(httr_oob_default = TRUE) \
+    \n}' >> /root/.Rprofile && \
+    cp /root/.Rprofile /home/jovyan/.Rprofile && \
+    chown jovyan /home/jovyan/.Rprofile && \
+    ln -s /bin/tar /bin/gtar && \
+    Rscript -e 'install.packages("devtools")' \
+            -e 'library(devtools)' \
+            -e 'install_github("agaveplatform/r-sdk")'
+
+USER jovyan
 # Install agave bash cli
 RUN  git clone -b develop --depth  1  https://github.com/agaveplatform/agave-cli.git src/cli
 ENV PATH $PATH:/usr/local/jq/bin:$HOME/src/cli/bin
@@ -34,14 +56,13 @@ ENV AGAVE_CLI_COMPLETION_SHOW_FILE_PATHS no
 ENV AGAVE_CLI_COMPLETION_CACHE_LIFETIME 0
 RUN tenants-init -t agave.prod -v
 
-ADD examples examples
-ADD INSTALL.ipynb INSTALL.ipynb
-ADD http://cct.lsu.edu/~sbrandt/AgaveOverview.pdf AgaveOverview.pdf
-RUN mv AgaveOverview.pdf "Agave Overview.pdf"
 USER root
-RUN chmod 644 "Agave Overview.pdf"
-USER jovyan
+COPY examples examples
+COPY INSTALL.ipynb INSTALL.ipynb
 COPY start.sh /usr/local/bin
+RUN chown -R jovyan examples INSTALL.ipynb
+#ADD http://cct.lsu.edu/~sbrandt/AgaveOverview.pdf AgaveOverview.pdf
+#RUN mv AgaveOverview.pdf "Agave Overview.pdf"
 RUN mkdir .jupyter
 COPY jupyter_notebook_config.py .jupyter/
 RUN chmod 700 .jupyter
@@ -79,6 +100,5 @@ RUN chmod 700 /home/jovyan/.ssh && \
     chown -R jovyan:users /home/jovyan/.ssh && \
     chown -R jovyan:users /home/jovyan/INSTALL.ipynb
 
-
-EXPOSE 8005 8888
+EXPOSE 8888
 CMD ["start-notebook.sh", "--NotebookApp.token=''"]

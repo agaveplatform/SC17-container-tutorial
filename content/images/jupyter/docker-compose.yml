@@ -14,5 +14,6 @@ services:
       - 8888:8888
     volumes:
       - ./work:/home/jovyan/work
+      - ./examples:/home/jovyan/examples
       - ../sandbox/ssh:/home/jovyan/.ssh:ro
       - $HOME/.agave:/home/jovyan/.agave

@@ -272,7 +272,7 @@ else:
 
 
 ## The port the notebook server will listen on.
-c.NotebookApp.port = 8005
+c.NotebookApp.port = 8888
 
 ## The number of additional ports to try if the specified port is not available.
 #c.NotebookApp.port_retries = 50
